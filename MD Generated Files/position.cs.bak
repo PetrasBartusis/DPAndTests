@@ -1,0 +1,15 @@
+/**
+ * @(#) Position.cs
+ */
+
+namespace ClassDiagram
+{
+	public class Position
+	{
+		int PosX;
+		
+		int PosY;
+		
+	}
+	
+}
