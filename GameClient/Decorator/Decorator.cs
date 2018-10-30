@@ -1,18 +1,25 @@
-/**
- * @(#) Decorator.cs
- */
 
+
+using System.Text;
+using System.Drawing;
+/**
+* @(#) Decorator.cs
+*/
 namespace ClassDiagram.GameClient
 {
-	public abstract class Decorator : MapComponent
+	abstract class Decorator : MapComponent
 	{
-		MapComponent mapComponent;
-		
-		public void draw(  )
-		{
-			
-		}
-		
-	}
+		protected MapComponent mapComponent;
+
+        public void drawPlayer(int x, int y)
+        {
+            
+        }
+        public Decorator(MapComponent mapComponent)
+        {
+            this.mapComponent = mapComponent;
+            this.currentMap = mapComponent.currentMap;
+        }
+    }
 	
 }

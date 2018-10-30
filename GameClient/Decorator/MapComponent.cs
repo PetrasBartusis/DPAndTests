@@ -4,10 +4,10 @@
 
 namespace ClassDiagram.GameClient
 {
-	public interface MapComponent
+	public abstract class MapComponent
 	{
-		void draw(  );
-		
+        public string[] currentMap = { "GGGGG", "GGGGG", "GGGGG", "GGGGG", "GGGGG" };
+        public abstract void draw(int x, int y);
 	}
 	
 }

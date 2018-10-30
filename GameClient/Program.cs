@@ -20,9 +20,16 @@ namespace GameClient
 
         static void Main()
         {
-            Console.WriteLine("Web API Client says: \"Hello World!\"");
+            //Console.WriteLine("Web API Client says: \"Hello World!\"");
+            Console.WriteLine();
+            Console.WriteLine("01234567890123456789");
+            
             EmptyMapComponent e = new EmptyMapComponent();
-            e.draw();
+            e.draw(0,0);
+            PlayerDecorator pd = new PlayerDecorator(e);
+            pd.draw(1, 2);
+            EnemyDecorator ed = new EnemyDecorator(e);
+            ed.draw(3, 4);
             //RunAsync().GetAwaiter().GetResult();
         }
 
