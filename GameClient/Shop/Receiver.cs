@@ -10,7 +10,6 @@ namespace ClassDiagram.ShopModule.Command
 		{
 			
 		}
-		
 	}
 	
 }
