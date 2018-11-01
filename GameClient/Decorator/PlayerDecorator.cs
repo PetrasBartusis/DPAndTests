@@ -14,9 +14,9 @@ namespace GameClient.Decorator
 
         public override void draw(int x, int y)
         {
-            StringBuilder currentTile = new StringBuilder(mapComponent.currentMap[x]);
-            currentTile[y] = 'P';
-            currentMap[x] = currentTile.ToString();
+            StringBuilder currentTile = new StringBuilder(mapComponent.currentMap[y]);
+            currentTile[x] = 'P';
+            currentMap[y] = currentTile.ToString();
             mapComponent.draw(0, 0);
         }
 

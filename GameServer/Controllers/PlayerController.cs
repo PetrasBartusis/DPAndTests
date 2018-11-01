@@ -24,7 +24,7 @@ namespace GameServer.Controllers
         public PlayerController(PlayerContext context)
         {
             _context = context;
-
+            /*
             if (_context.players.Count() == 0)
             {
                 // Create a new Player if collection is empty,
@@ -47,7 +47,7 @@ namespace GameServer.Controllers
                 }
 
                 _context.SaveChanges();
-            }
+            }*/
         }
 
 
@@ -92,7 +92,8 @@ namespace GameServer.Controllers
             {
                 return NotFound();
             }
-
+            pp.x = p.x;
+            pp.y = p.y;
             _context.players.Update(pp);
             _context.SaveChanges();
 

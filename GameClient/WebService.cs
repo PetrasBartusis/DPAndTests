@@ -7,10 +7,11 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using GameServer.Models;
+using Newtonsoft.Json;
 /**
 * @(#) WebService.cs
 */
-namespace ClassDiagram.GameClient
+namespace GameClient
 {
 	public class WebService
 	{
@@ -26,38 +27,85 @@ namespace ClassDiagram.GameClient
                 new MediaTypeWithQualityHeaderValue(mediaType));
         }
 
-        async Task<bool> CreatePlayerAsync(Player player)
+        public void ShowProduct(PlayerJson player)
+        {
+            Console.WriteLine($"Id: {player.id}\tName: {player.name}\tScore: " +
+                              $"{player.experience}\tposX: {player.x}\tposY: {player.y}");
+        }
+
+        public async Task<Uri> CreatePlayerAsync(PlayerJson player)
         {
             HttpResponseMessage response = await client.PostAsJsonAsync(
                 requestUri, player);
             response.EnsureSuccessStatusCode();
-           
+
+            // Deserialize the updated product from the response body.
+            PlayerJson player2 = await response.Content.ReadAsAsync<PlayerJson>();
+            if (player2 != null)
+            {
+                ShowProduct(player2);
+            }
+
             // return URI of the created resource.
-            return response.IsSuccessStatusCode;
+            return response.Headers.Location;
         }
 
-        async Task<ICollection<Player>> GetAllPlayerAsync(string path)
+        public async Task<ICollection<PlayerJson>> GetAllPlayerAsync(string path)
         {
-            ICollection<Player> players = null;
+            ICollection<PlayerJson> players = null;
             HttpResponseMessage response = await client.GetAsync(path + "api/player");
             if (response.IsSuccessStatusCode)
             {
-                players = await response.Content.ReadAsAsync<ICollection<Player>>();
+                players = await response.Content.ReadAsAsync<ICollection<PlayerJson>>();
             }
             return players;
         }
-        public async Task<List<Player>> getAllPlayers(  )
-		{
-            List<Player> players = new List<Player>();
-            ICollection<Player> playersList = await GetAllPlayerAsync(client.BaseAddress.PathAndQuery);
-            foreach (Player p in playersList)
+
+        public async Task<PlayerJson> GetPlayerAsync(string path)
+        {
+            PlayerJson player = null;
+            HttpResponseMessage response = await client.GetAsync(path);
+            if (response.IsSuccessStatusCode)
             {
-                players.Add(p);
+                player = await response.Content.ReadAsAsync<PlayerJson>();
             }
-            return players;
+            return player;
         }
-		
-		public bool useItem( Item item )
+
+        public async Task<HttpStatusCode> UpdatePlayerAsync(PlayerJson player)
+        {
+            HttpResponseMessage response = await client.PutAsJsonAsync(
+                requestUri + $"{player.id}", player);
+            response.EnsureSuccessStatusCode();
+
+            return response.StatusCode;
+        }
+
+        public async Task<HttpStatusCode> PatchPlayerAsync(Coordinates coordinates)
+        {
+            string jsonString = JsonConvert.SerializeObject(coordinates);    //"{\"id\":1, \"posX\":777,\"posY\":777}";
+
+            HttpContent httpContent = new StringContent(jsonString, System.Text.Encoding.UTF8, mediaType);
+            HttpRequestMessage request = new HttpRequestMessage
+            {
+                Method = new HttpMethod("PATCH"),
+                RequestUri = new Uri(client.BaseAddress + requestUri),
+                Content = httpContent,
+            };
+
+            HttpResponseMessage response = await client.SendAsync(request);
+            return response.StatusCode;
+
+        }
+
+        public async Task<HttpStatusCode> DeletePlayerAsync(long id)
+        {
+            HttpResponseMessage response = await client.DeleteAsync(
+                requestUri + $"{id}");
+            return response.StatusCode;
+        }
+
+        public bool useItem( Item item )
 		{
 			return false;
 		}
@@ -118,7 +166,7 @@ namespace ClassDiagram.GameClient
 			return false;
 		}
 		
-		public async Task<bool> createPlayer( Player player )
+		/*public async Task<bool> createPlayer( Player player )
 		{
             return await CreatePlayerAsync(player);
         }
@@ -135,7 +183,7 @@ namespace ClassDiagram.GameClient
             }
             return null;
         }
-
+        */
     }
 	
 }
