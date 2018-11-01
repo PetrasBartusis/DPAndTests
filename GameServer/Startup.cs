@@ -29,6 +29,7 @@ namespace GameServer
         {
 
             services.AddDbContext<PlayerContext>(opt => opt.UseInMemoryDatabase("PlayersList"));
+            services.AddDbContext<EnemyContext>(opt => opt.UseInMemoryDatabase("EnemyPartyList"));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

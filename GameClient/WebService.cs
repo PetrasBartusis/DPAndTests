@@ -50,6 +50,16 @@ namespace GameClient
             return response.Headers.Location;
         }
 
+        public async Task<ICollection<EnemyPartyJson>> GetAllEnemiesAsync()
+        {
+            ICollection<EnemyPartyJson> enemies = null;
+            HttpResponseMessage response = await client.GetAsync(client.BaseAddress + "api/enemy");
+            if (response.IsSuccessStatusCode)
+            {
+                enemies = await response.Content.ReadAsAsync<ICollection<EnemyPartyJson>>();
+            }
+            return enemies;
+        }
         public async Task<ICollection<PlayerJson>> GetAllPlayerAsync(string path)
         {
             ICollection<PlayerJson> players = null;

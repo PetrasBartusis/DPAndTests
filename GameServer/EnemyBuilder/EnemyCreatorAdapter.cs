@@ -17,17 +17,17 @@ namespace GameServer.EnemyBuilder
             this.enemyPartyDirector = enemyPartyDirector;
         }
 
-        public EnemyParty GetEnemyParty(int id, Position position)
+        public EnemyParty GetEnemyParty(Coordinates position)
         {
-            return enemyPartyDirector.construct(5, 3, position, id);
+            return enemyPartyDirector.construct(5, 3, position);
         }
-        public EnemyParty GetEnemyParty(int id, int dificultyLevel, Position position)
+        public EnemyParty GetEnemyParty(int dificultyLevel, Coordinates position)
         {
-            return enemyPartyDirector.construct(dificultyLevel, 3, position, id);
+            return enemyPartyDirector.construct(dificultyLevel, 3, position);
         }
-        public EnemyParty GetEnemyParty(int id, int dificultyLevel, int partySize, Position position)
+        public EnemyParty GetEnemyParty(int dificultyLevel, int partySize, Coordinates position)
         {
-            return enemyPartyDirector.construct(dificultyLevel, 3, position, id);
+            return enemyPartyDirector.construct(dificultyLevel, 3, position);
         }
     }
 	

@@ -12,9 +12,9 @@ namespace GameServer.EnemyBuilder
 
         private IEnemyPartyBuilder builder;
 		
-		public EnemyParty construct(int difficultyLevel, int enemyCnt, Position p, int id)
+		public EnemyParty construct(int difficultyLevel, int enemyCnt, Coordinates p)
 		{
-            builder.StartNew(id, p);
+            builder.StartNew(p);
             for (int i = 0; i < enemyCnt; i++)
             {
                 int r = random.Next(100);

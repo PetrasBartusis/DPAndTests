@@ -6,11 +6,10 @@ namespace GameServer
 {
 	public class Entity
 	{
-		int id;
-		string name;
-		int hitpoints;
-		int attack;
-		int defence;
+        public string name;
+		public int hitpoints;
+        public int attack;
+        public int defence;
 		
 		public Entity( string n, int hp, int a, int d )
 		{

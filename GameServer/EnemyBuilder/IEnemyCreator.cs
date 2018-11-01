@@ -8,9 +8,9 @@ namespace GameServer.EnemyBuilder
 {
 	public interface IEnemyCreator
 	{
-        EnemyParty GetEnemyParty(int id, Position position);
-        EnemyParty GetEnemyParty(int id, int dificultyLevel, Position position);
-        EnemyParty GetEnemyParty(int id, int dificultyLevel, int partySize, Position position);
+        EnemyParty GetEnemyParty(Coordinates position);
+        EnemyParty GetEnemyParty(int dificultyLevel, Coordinates position);
+        EnemyParty GetEnemyParty(int dificultyLevel, int partySize, Coordinates position);
 
     }
 	

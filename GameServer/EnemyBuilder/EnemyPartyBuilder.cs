@@ -11,9 +11,9 @@ namespace GameServer.EnemyBuilder
 
         private EnemyParty enemyParty;
 
-        IEnemyPartyBuilder IEnemyPartyBuilder.StartNew(int id, Position p)
+        IEnemyPartyBuilder IEnemyPartyBuilder.StartNew(Coordinates p)
         {
-            enemyParty = new EnemyParty(id, p);
+            enemyParty = new EnemyParty(p);
             return this;
         }
         public IEnemyPartyBuilder AddEnemy(int difficultyLevel)

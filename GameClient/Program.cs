@@ -8,6 +8,10 @@ using Newtonsoft.Json;
 using GameServer.Models;
 using GameClient.Decorator;
 using GameClient.ShopModule;
+using GameServer.EnemyBuilder;
+using GameServer.Controllers;
+using GameServer;
+using GameServer.EnemyFactory;
 
 namespace GameClient
 {
@@ -28,10 +32,24 @@ namespace GameClient
 
         static void Main()
         {
+            createEnemies();
             Console.WriteLine("Web API Client says: \"Hello World!\"");
             RunAsync().GetAwaiter().GetResult();
         }
 
+        public static List<EnemyParty> createEnemies()
+        {
+            IEnemyCreator enemyCreator = new EnemyCreatorAdapter(new EnemyPartyDirector(new GrassEnvirnmentFactory()));
+            List<EnemyParty> enemies = new List<EnemyParty>();
+            enemies.Add(enemyCreator.GetEnemyParty(0, new Coordinates(0, 0)));
+            enemies.Add(enemyCreator.GetEnemyParty(1, new Coordinates(4, 4)));
+            foreach (EnemyParty p in enemies)
+            {
+                EnemyPartyJson pj = EnemyConverter.createEnemyPartyJson(p);
+                Console.WriteLine();
+            }
+            return enemies;
+        }
         static async Task RunAsync()
         {
             // Update port # in the following line.
@@ -64,6 +82,11 @@ namespace GameClient
                 Console.WriteLine("1.2)\tGet created player");
                 player = await ws.GetPlayerAsync(url.PathAndQuery);
                 ShowProduct(player);
+
+                // Get the created player
+                Console.WriteLine("1.3)\tGet enemies");
+                ICollection<EnemyPartyJson> enemyPartyJsons = (await ws.GetAllEnemiesAsync());
+                List<EnemyParty> enemyParties = EnemyConverter.createEnemyParties(enemyPartyJsons);
 
                 ConsoleKeyInfo keyInfo = Console.ReadKey();
                 char key = keyInfo.KeyChar;
@@ -101,7 +124,12 @@ namespace GameClient
                     e.draw(0, 0);
                     PlayerDecorator pd = new PlayerDecorator(e);
                     pd.draw(Convert.ToInt32(player.x), Convert.ToInt32(player.y));
-                    
+
+                    EnemyDecorator ed = new EnemyDecorator(e);
+                    foreach (EnemyParty ep in enemyParties)
+                    {
+                        ed.draw(Convert.ToInt32(ep.position.x),Convert.ToInt32(ep.position.y));
+                    }
                     keyInfo = Console.ReadKey();
                     key = keyInfo.KeyChar;
                 }

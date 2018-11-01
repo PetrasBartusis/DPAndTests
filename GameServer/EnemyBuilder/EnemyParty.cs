@@ -7,17 +7,19 @@ namespace GameServer.EnemyBuilder
 {
     public class EnemyParty
     {
-        private List<Entity> enemies;
+        public List<Entity> enemies;
 
-        private Position position;
+        public Coordinates position;
 
-        public int id { get; private set; }
-
-        public EnemyParty(int id, Position p)
+        public EnemyParty(Coordinates p)
         {
-            this.id = id;
             this.position = p;
             enemies = new List<Entity>();
+        }
+        public EnemyParty(List<Entity> entities, Coordinates p)
+        {
+            this.position = p;
+            enemies = entities;
         }
 
         public void addEnemy(Entity enemy)
