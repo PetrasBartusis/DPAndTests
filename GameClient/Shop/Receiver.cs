@@ -2,7 +2,7 @@
  * @(#) Receiver.cs
  */
 
-namespace ClassDiagram.ShopModule.Command
+namespace GameClient.Shop
 {
 	public class Receiver
 	{

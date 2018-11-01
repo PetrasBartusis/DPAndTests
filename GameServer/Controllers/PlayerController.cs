@@ -33,10 +33,10 @@ namespace GameServer.Controllers
                 for (int i = 0; i < 10; i++)
                 {
                     Qty++;
-                    Player p = new Player { Name = "Player-" + Qty, Score = 0, PosX = 0, PosY = 0 };
-                    _context.Players.Add(p);
+                    //Player p = new Player { Name = "Player-" + Qty, Score = 0, PosX = 0, PosY = 0 };
+                    //_context.Players.Add(p);
                 }
-            
+
                 _context.SaveChanges();
             }
         }
@@ -54,22 +54,11 @@ namespace GameServer.Controllers
         public ActionResult<Player> GetById(long id)
         {
             Player p = _context.Players.Find(id);
-            if(p == null){
-                return  NotFound("player not found");
+            if (p == null)
+            {
+                return NotFound("player not found");
             }
             return p;
-        }
-
-        // POST api/player
-        [HttpPost]
-        //public string Create(Player player)
-        public ActionResult<Player> Create([FromBody] Player player)
-        {
-            _context.Players.Add(player);
-            _context.SaveChanges();
-
-            //return Ok(); //"created - ok"; 
-            return CreatedAtRoute("GetPlayer", new { id = player.Id }, player);
         }
 
 
@@ -83,10 +72,10 @@ namespace GameServer.Controllers
                 return NotFound();
             }
 
-            pp.Name = p.Name;
-            pp.PosX = p.PosX;
-            pp.PosY = p.PosY;
-            pp.Score = p.Score;
+            //pp.Name = p.Name;
+            //pp.PosX = p.PosX;
+            //pp.PosY = p.PosY;
+            //pp.Score = p.Score;
 
             _context.Players.Update(pp);
             _context.SaveChanges();
@@ -104,8 +93,8 @@ namespace GameServer.Controllers
             }
             else
             {
-                player.PosX = request.PosX;
-                player.PosY = request.PosY;
+                //player.PosX = request.PosX;
+                //player.PosY = request.PosY;
 
                 _context.Players.Update(player);
                 _context.SaveChanges();
@@ -133,53 +122,46 @@ namespace GameServer.Controllers
             return NoContent();
         }
 
-    }
+        public List<Player> getAllPlayers()
+        {
+            return null;
+        }
 
-    	public List<Player> getAllPlayers(  )
-		{
-			return null;
-		}
-		
-		public ClassDiagram.WebAPIGameServer.Models.Player getPlayerById( Int id )
-		{
-			return null;
-		}
-		
-		public ClassDiagram.WebAPIGameServer.Models.Player createPlayer( String name )
-		{
-			return null;
-		}
-		
-		public ClassDiagram.WebAPIGameServer.Models.Player move( ClassDiagram.GameClient.Direction direction, int playerId )
-		{
-			return null;
-		}
-		
-		public ClassDiagram.GameClient.Bool delete( ClassDiagram.WebAPIGameServer.Models.Player player )
-		{
-			return null;
-		}
-		
-		public void PartialUpdate( ClassDiagram.WebAPIGameServer.Models.Coordinates coord )
-		{
-			
-		}
-		
-		public ClassDiagram.GameClient.List<Item> getInventory(  )
-		{
-			return null;
-		}
-		
-		public ClassDiagram.GameClient.Bool buy( ClassDiagram.GameClient.List<Item> items )
-		{
-			return null;
-		}
-		
-		public ClassDiagram.GameClient.Bool removeItem( ClassDiagram.ShopModule.Item item )
-		{
-			return null;
-		}
-		
+        public Player getPlayerById(int id)
+        {
+            return null;
+        }
+
+        public Player createPlayer(String name)
+        {
+            return null;
+        }
+
+        public Player move(Direction direction, int playerId)
+        {
+            return null;
+        }
+
+        public bool delete(Player player)
+        {
+            return false;
+        }
+
+        public List<Item> getInventory()
+        {
+            return null;
+        }
+
+        public bool buy(List<Item> items)
+        {
+            return false;
+        }
+
+        public bool removeItem(Item item)
+        {
+            return false;
+        }
+    }
 
 }
 

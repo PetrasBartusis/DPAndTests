@@ -9,11 +9,11 @@ namespace GameServer.Models
 {
 	public class Player : Entity
 	{
-		int level;
-		
-		int experience;
-		
-		int gold;
+		public int level { get; private set; }
+
+        public int experience { get; private set; }
+
+        public int gold { get; private set; }
         private List<Item> items;
 
         int itemCount;

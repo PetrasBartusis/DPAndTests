@@ -5,11 +5,11 @@ using System.Drawing;
 /**
 * @(#) Decorator.cs
 */
-namespace ClassDiagram.GameClient
+namespace GameClient.Decorator
 {
-	abstract class Decorator : MapComponent
+	public abstract class Decorator : MapComponent
 	{
-		protected MapComponent mapComponent;
+		public MapComponent mapComponent;
 
         public Decorator(MapComponent mapComponent)
         {

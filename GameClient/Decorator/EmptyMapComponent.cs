@@ -5,7 +5,7 @@ using System.Text;
 /**
 * @(#) EmptyMapComponent.cs
 */
-namespace ClassDiagram.GameClient
+namespace GameClient.Decorator
 {
     public class EmptyMapComponent : MapComponent
     {

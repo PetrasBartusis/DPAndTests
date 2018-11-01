@@ -1,4 +1,5 @@
-using System.Collections.Generic.List;
+using System.Collections.Generic;
+using GameServer.Models;
 
 namespace GameClient.Shop
 {
@@ -6,14 +7,19 @@ namespace GameClient.Shop
     {
         Receiver receiver;
 
-        System.Collections.Generic.List<Items> items;
+        List<Item> items;
 
-        public void addItem(ClassDiagram.ShopModule.Item item)
+        public void addItem(Item item)
         {
             items.Add(item);
         }
 
-        public void removeItem(ClassDiagram.ShopModule.Item item)
+        public void execute()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void removeItem(Item item)
         {
             items.Remove(item);
         }

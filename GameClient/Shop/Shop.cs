@@ -1,8 +1,10 @@
-/**
- * @(#) Shop.cs
- */
 
-namespace ClassDiagram.ShopModule.Command
+
+using GameServer.Models;
+/**
+* @(#) Shop.cs
+*/
+namespace GameClient.Shop
 {
 	public class Shop
 	{
@@ -10,20 +12,20 @@ namespace ClassDiagram.ShopModule.Command
         ShoppingCommand cart;
         ShoppingCommand sell;
 
-        public void addToCart( ClassDiagram.ShopModule.Item item )
+        public void addToCart( Item item )
 		{
             cart.addItem(item);
         }
-        public void addToSell(ClassDiagram.ShopModule.Item item)
+        public void addToSell(Item item)
         {
             sell.addItem(item);
         }
 
-        public void removeFromCart(ClassDiagram.ShopModule.Item item)
+        public void removeFromCart(Item item)
         {
             cart.removeItem(item);
         }
-        public void removeFromSell(ClassDiagram.ShopModule.Item item)
+        public void removeFromSell(Item item)
         {
             sell.removeItem(item);
         }

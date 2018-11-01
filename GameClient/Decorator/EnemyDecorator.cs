@@ -4,7 +4,7 @@ using System.Text;
 /**
 * @(#) EnemyDecorator.cs
 */
-namespace ClassDiagram.GameClient
+namespace GameClient.Decorator
 {
     class EnemyDecorator : Decorator
     {

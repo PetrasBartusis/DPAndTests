@@ -2,7 +2,7 @@
  * @(#) DragonFactory.cs
  */
 
-namespace ClassDiagram.EnemyFactory
+namespace GameServer.EnemyFactory
 {
 	public class DragonFactory : EnemyFactory
 	{

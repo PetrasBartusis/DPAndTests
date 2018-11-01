@@ -2,7 +2,7 @@
  * @(#) Direction.cs
  */
 
-namespace ClassDiagram.GameClient
+namespace GameServer.Models
 {
 	public enum Direction
 	{

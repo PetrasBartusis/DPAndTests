@@ -1,7 +1,11 @@
-/**
- * @(#) Server.cs
- */
 
+
+using System.Collections.Generic;
+using GameServer.Controllers;
+using GameServer.Models;
+/**
+* @(#) Server.cs
+*/
 namespace GameServer
 {
 	public class Server
@@ -11,9 +15,7 @@ namespace GameServer
         GameServer.Controllers.EnemyController enemyController;
 
         GameServer.Controllers.PlayerController playerController;
-		
-		GameClient.WebService ws;
-		
+			
 		public List<Player> getAllPlayers(  )
 		{
             return playerController.getAllPlayers();
@@ -21,7 +23,7 @@ namespace GameServer
 		
 		public bool useItem( int playerId, Item item )
 		{
-			return null;
+			return false;
 		}
 		
 		public Position move( int playerId, Direction direction )
@@ -31,17 +33,17 @@ namespace GameServer
 		
 		public bool run( int playerId )
 		{
-			return null;
+			return false;
 		}
 		
 		public bool buyItems( int playerId, List<Item> items )
 		{
-			return null;
+			return false;
 		}
 		
 		public bool attack( int playerId, int enemyId )
 		{
-			return null;
+			return false;
 		}
 		
 		public List<Item> getInventory( int playerId )
@@ -49,12 +51,12 @@ namespace GameServer
 			return null;
 		}
 		
-		public Bool startFight( int playerId )
+		public bool startFight( int playerId )
 		{
-			return null;
+			return false;
 		}
 		
-		public Player createPlayer( String name )
+		public Player createPlayer(string name )
 		{
 			return null;
 		}

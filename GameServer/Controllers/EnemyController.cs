@@ -1,7 +1,11 @@
-/**
- * @(#) EnemyController.cs
- */
 
+
+using System.Collections.Generic;
+using GameServer.EnemyBuilder;
+using GameServer.Models;
+/**
+* @(#) EnemyController.cs
+*/
 namespace GameServer.Controllers
 {
 	public class EnemyController

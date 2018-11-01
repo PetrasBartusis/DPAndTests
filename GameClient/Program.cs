@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using GameServer.Models;
 using ClassDiagram.GameClient;
+using GameClient.Decorator;
 
 namespace GameClient
 {
@@ -79,7 +80,7 @@ namespace GameClient
         static async Task<HttpStatusCode> UpdatePlayerAsync(Player player)
         {
             HttpResponseMessage response = await client.PutAsJsonAsync(
-                requestUri + $"{player.Id}", player);
+                requestUri + $"{player.id}", player);
             response.EnsureSuccessStatusCode();
 
             return response.StatusCode;
@@ -132,13 +133,7 @@ namespace GameClient
 
                 // Create a new player
                 Console.WriteLine("1.1)\tCreate the player");
-                Player player = new Player
-                {
-                    Name = "Studentas-" + playersList.Count.ToString(),
-                    Score = 100,
-                    PosX = 20,
-                    PosY = 30
-                };
+                /*
 
                 var url = await CreatePlayerAsync(player);
                 Console.WriteLine($"Created at {url}");
@@ -201,7 +196,7 @@ namespace GameClient
                 delPlayer = await GetPlayerAsync(url4Del.PathAndQuery);
                 ShowProduct(delPlayer);
 
-                Console.WriteLine("Web API Client says: \"GoodBy!\"");
+                Console.WriteLine("Web API Client says: \"GoodBy!\"");*/
 
             }
             catch (Exception e)

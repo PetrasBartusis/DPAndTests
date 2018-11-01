@@ -4,21 +4,21 @@
 
 namespace GameServer.Models
 {
-	public class Entity
-	{
-		protected int id;
+    public class Entity
+    {
+        public int id { get; protected set; }
 
-        protected string name;
+        public string name { get; protected set; }
 
-        protected int hitpoints;
+        public int hitpoints { get; protected set; }
 
-        protected int currentHitpoints;
+        public int currentHitpoints { get; protected set; }
 
-        protected int attack;
+        public int attack { get; protected set; }
 
-        protected int defence;
-		
-		public Entity( string n, int hp, int a, int d )
+        public int defence { get; protected set; }
+
+        public Entity( string n, int hp, int a, int d )
 		{
             name = n;
             hitpoints = hp;

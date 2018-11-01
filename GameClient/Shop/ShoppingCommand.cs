@@ -1,13 +1,15 @@
-/**
- * @(#) BuyCommand.cs
- */
 
-namespace ClassDiagram.ShopModule.Command
+
+using GameServer.Models;
+/**
+* @(#) BuyCommand.cs
+*/
+namespace GameClient.Shop
 {
 	public interface ShoppingCommand
 	{
-		void addItem( ClassDiagram.ShopModule.Item item );
-        void removeItem(ClassDiagram.ShopModule.Item item);
+        void addItem( Item item );
+        void removeItem(Item item);
         void execute();
 	}
 	
