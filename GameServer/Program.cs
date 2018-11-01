@@ -17,9 +17,9 @@ namespace GameServer
         public static void Main(string[] args)
         {
             Player p = new Player("Jonas", 15, 5, 3, 1, 0, 0);
-            p.addItem(new Item(1, "hp potion"));
-            p.addItem(new Item(2, "buff potion"));
-            p.addItem(new Item(3, "damage potion"));
+            p.addItem(new Item(1, "hp potion", PotionType.health, 15));
+            p.addItem(new Item(2, "buff potion", PotionType.buff, 20));
+            p.addItem(new Item(3, "damage potion", PotionType.damage, 50));
             Console.WriteLine("Player used hp potion");
             p.damagePlayer(8);
             string e = p.ToString();

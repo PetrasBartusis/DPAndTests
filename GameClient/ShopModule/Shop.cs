@@ -4,11 +4,16 @@ using GameServer.Models;
 /**
 * @(#) Shop.cs
 */
-namespace GameClient.Shop
+namespace GameClient.ShopModule
 {
 	public class Shop
 	{
-		Receiver receiver;
+        public Shop(Receiver receiver)
+        {
+            cart = new AddToCart(receiver);
+            sell = new AddToSell(receiver);
+        }
+
         ShoppingCommand cart;
         ShoppingCommand sell;
 

@@ -6,13 +6,13 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using GameServer.Models;
-using ClassDiagram.GameClient;
 using GameClient.Decorator;
+using GameClient.ShopModule;
 
 namespace GameClient
 {
  
-    class Program
+    class Program : Receiver
     {
         static HttpClient client = new HttpClient();
         static string requestUri = "api/player/";
@@ -28,9 +28,21 @@ namespace GameClient
             pd.draw(1, 2);
             EnemyDecorator ed = new EnemyDecorator(e);
             ed.draw(3, 4);
-            //RunAsync().GetAwaiter().GetResult();
+            Console.ReadKey();
         }
 
+        static void shopTest()
+        {
+            Shop shop = new Shop(new Receiver());
+            shop.addToCart(new Item(0, "HP", PotionType.health, 50));
+            shop.addToCart(new Item(0, "HP", PotionType.health, 50));
+            shop.addToCart(new Item(0, "HP", PotionType.health, 50));
+            shop.addToSell(new Item(0, "HP", PotionType.health, 50));
+            shop.addToSell(new Item(0, "HP", PotionType.health, 50));
+            shop.addToSell(new Item(0, "HP", PotionType.health, 50));
+            shop.execute();
+            shop.execute();
+        }
 
 
         static void ShowProduct(Player player)
@@ -206,5 +218,6 @@ namespace GameClient
 
             Console.ReadLine();
         }
+
     }
 }

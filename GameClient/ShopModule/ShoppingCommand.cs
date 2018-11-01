@@ -4,7 +4,7 @@ using GameServer.Models;
 /**
 * @(#) BuyCommand.cs
 */
-namespace GameClient.Shop
+namespace GameClient.ShopModule
 {
 	public interface ShoppingCommand
 	{

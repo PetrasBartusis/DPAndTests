@@ -21,19 +21,20 @@ namespace GameServer.Models
             effect.use(player);
         }
 		
-        public Item(int id, string name)
+        public Item(int id, string name, PotionType type, int price)
         {
             this.id = id;
             this.name = name;
-            switch (name)
+            this.price = price;
+            switch (type)
             {
-                case "hp potion":
+                case PotionType.health:
                     effect = new HealthEffect();
                     break;
-                case "buff potion":
+                case PotionType.buff:
                     effect = new BuffEffect();
                     break;
-                case "damage potion":
+                case PotionType.damage:
                     effect = new DamageEffect();
                     break;
                 default:
