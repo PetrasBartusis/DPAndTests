@@ -9,16 +9,16 @@ namespace GameServer.Models
 {
 	public class Player : Entity
 	{
-		public int level { get; private set; }
+		public int level { get; set; }
 
-        public int experience { get; private set; }
+        public int experience { get; set; }
 
-        public int gold { get; private set; }
+        public int gold { get; set; }
         private List<Item> items;
 
         int itemCount;
 
-        public Player(string n, int hp, int a, int d, int level, int experience, int gold) : base(n, hp, a, d)
+        public Player(int id, int x, int y, string name, int hitpoints, int attack, int defence, int level, int experience, int gold) : base(id, x, y, name, hitpoints, attack, defence)
         {
             this.level = level;
             this.experience = experience;
@@ -51,6 +51,17 @@ namespace GameServer.Models
                     break;
                 }
             }
+        }
+
+        public void update(string n, int hp, int a, int d, int lv, int xp, int g)
+        {
+            name = n;
+            hitpoints = hp;
+            attack = a;
+            defence = d;
+            level = lv;
+            experience = xp;
+            gold = g;
         }
 
         public override string ToString()

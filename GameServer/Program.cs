@@ -16,10 +16,10 @@ namespace GameServer
     {
         public static void Main(string[] args)
         {
-            Player p = new Player("Jonas", 15, 5, 3, 1, 0, 0);
-            p.addItem(new Item(1, "hp potion", PotionType.health, 15));
-            p.addItem(new Item(2, "buff potion", PotionType.buff, 20));
-            p.addItem(new Item(3, "damage potion", PotionType.damage, 50));
+            /*Player p = new Player(1, 1, "Jonas", 15, 5, 3, 1, 0, 0);
+            p.addItem(new Item(1, "hp potion"));
+            p.addItem(new Item(2, "buff potion"));
+            p.addItem(new Item(3, "damage potion"));
             Console.WriteLine("Player used hp potion");
             p.damagePlayer(8);
             string e = p.ToString();
@@ -30,8 +30,8 @@ namespace GameServer
             e = p.ToString();
             Console.WriteLine("Player used damage potion");
             p.useItem("damage potion");
-            e = p.ToString();
-            //CreateWebHostBuilder(args).Build().Run();*/
+            e = p.ToString();*/
+            CreateWebHostBuilder(args).Build().Run();
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>

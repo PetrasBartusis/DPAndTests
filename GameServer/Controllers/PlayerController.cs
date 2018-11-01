@@ -26,15 +26,26 @@ namespace GameServer.Controllers
         {
             _context = context;
 
-            if (_context.Players.Count() == 0)
+            if (_context.Players2.Count() == 0)
             {
                 // Create a new Player if collection is empty,
                 // which means you can't delete all Players.
                 for (int i = 0; i < 10; i++)
                 {
                     Qty++;
-                    //Player p = new Player { Name = "Player-" + Qty, Score = 0, PosX = 0, PosY = 0 };
-                    //_context.Players.Add(p);
+                    Player2 p = new Player2
+                    {
+                        x = 1,
+                        y = 2,
+                        name = "2",
+                        hitpoints = 10,
+                        attack = 1,
+                        defence = 1,
+                        level = 1,
+                        experience = 0,
+                        gold = 4
+                    };
+                    _context.Players2.Add(p);
                 }
 
                 _context.SaveChanges();
@@ -44,16 +55,16 @@ namespace GameServer.Controllers
 
         // GET api/player
         [HttpGet]
-        public ActionResult<IEnumerable<Player>> GetAll()
+        public ActionResult<IEnumerable<Player2>> GetAll()
         {
-            return _context.Players.ToList();
+            return _context.Players2.ToList();
         }
 
         // GET api/player/5
         [HttpGet("{id}", Name = "GetPlayer")]
-        public ActionResult<Player> GetById(long id)
+        public ActionResult<Player2> GetById(long id)
         {
-            Player p = _context.Players.Find(id);
+            Player2 p = _context.Players2.Find(id);
             if (p == null)
             {
                 return NotFound("player not found");
@@ -61,48 +72,36 @@ namespace GameServer.Controllers
             return p;
         }
 
+        // POST api/player
+        [HttpPost]
+        //public string Create(Player player)
+        public ActionResult<Player> Create([FromBody] Player2 player)
+        {
+            _context.Players2.Add(player);
+            _context.SaveChanges();
+
+            //return Ok(); //"created - ok"; 
+            return CreatedAtRoute("GetPlayer", new { id = player.id }, player);
+        }
+
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public IActionResult Update(long id, [FromBody] Player p)
+        public IActionResult Update(long id, [FromBody] Player2 p)
         {
-            var pp = _context.Players.Find(id);
+            var pp = _context.Players2.Find(id);
             if (pp == null)
             {
                 return NotFound();
             }
 
-            //pp.Name = p.Name;
-            //pp.PosX = p.PosX;
-            //pp.PosY = p.PosY;
-            //pp.Score = p.Score;
-
-            _context.Players.Update(pp);
+            _context.Players2.Update(pp);
             _context.SaveChanges();
 
             return Ok(); //NoContent();
         }
 
-        [HttpPatch]
-        public IActionResult PartialUpdate([FromBody] Coordinates request)
-        {
-            var player = _context.Players.Find(request.Id);
-            if (player == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                //player.PosX = request.PosX;
-                //player.PosY = request.PosY;
-
-                _context.Players.Update(player);
-                _context.SaveChanges();
-            }
-            return Ok();
-            //return CreatedAtRoute("GetPlayer", new { id = player.Id }, player);
-        }
-
+       
         // DELETE api/values/5
         /*[HttpDelete("{id}")]
         public void Delete(int id)
@@ -111,58 +110,18 @@ namespace GameServer.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(long id)
         {
-            var todo = _context.Players.Find(id);
+            var todo = _context.Players2.Find(id);
             if (todo == null)
             {
                 return NotFound();
             }
 
-            _context.Players.Remove(todo);
+            _context.Players2.Remove(todo);
             _context.SaveChanges();
             return NoContent();
         }
 
-        public List<Player> getAllPlayers()
-        {
-            return null;
-        }
-
-        public Player getPlayerById(int id)
-        {
-            return null;
-        }
-
-        public Player createPlayer(String name)
-        {
-            return null;
-        }
-
-        public Player move(Direction direction, int playerId)
-        {
-            return null;
-        }
-
-        public bool delete(Player player)
-        {
-            return false;
-        }
-
-        public List<Item> getInventory()
-        {
-            return null;
-        }
-
-        public bool buy(List<Item> items)
-        {
-            return false;
-        }
-
-        public bool removeItem(Item item)
-        {
-            return false;
-        }
     }
-
 }
 
 

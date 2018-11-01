@@ -3,12 +3,13 @@ namespace GameServer.Models
 {
     public class Coordinates
     {
-        public long Id { get; set; }
-        public long PosX { get; set; }
-        public long PosY { get; set; }
+        public long x { get; set; }
+        public long y { get; set; }
 
-        public Coordinates()
+        public Coordinates(int x, int y)
         {
+            this.x = x;
+            this.y = y;
         }
     }
 }

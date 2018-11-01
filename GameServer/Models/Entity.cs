@@ -4,27 +4,28 @@
 
 namespace GameServer.Models
 {
-    public class Entity
+    public class Entity: Coordinates
     {
-        public int id { get; protected set; }
+        public int id { get; set; }
 
-        public string name { get; protected set; }
+        public string name { get; set; }
 
-        public int hitpoints { get; protected set; }
+        public int hitpoints { get; set; }
 
-        public int currentHitpoints { get; protected set; }
+        public int currentHitpoints { get; set; }
 
-        public int attack { get; protected set; }
+        public int attack { get; set; }
 
-        public int defence { get; protected set; }
+        public int defence { get; set; }
 
-        public Entity( string n, int hp, int a, int d )
+        public Entity(int id, int x, int y, string name, int hitpoints, int attack, int defence ): base(x, y)
 		{
-            name = n;
-            hitpoints = hp;
-            attack = a;
-            defence = d;
-            currentHitpoints = hitpoints;
+            this.id = id;
+            this.name = name;
+            this.hitpoints = hitpoints;
+            this.attack = attack;
+            this.defence = defence;
+            this.currentHitpoints = hitpoints;
 		}
 		
 	}

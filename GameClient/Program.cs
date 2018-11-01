@@ -11,85 +11,59 @@ using GameClient.ShopModule;
 
 namespace GameClient
 {
- 
-    class Program : Receiver
+
+    class Program
     {
         static HttpClient client = new HttpClient();
         static string requestUri = "api/player/";
         static string mediaType = "application/json";
 
-
-        static void Main()
+        static void ShowProduct(Player2 player)
         {
-
-            EmptyMapComponent e = new EmptyMapComponent();
-            e.draw(0,0);
-            PlayerDecorator pd = new PlayerDecorator(e);
-            pd.draw(1, 2);
-            EnemyDecorator ed = new EnemyDecorator(e);
-            ed.draw(3, 4);
-            Console.ReadKey();
+            Console.WriteLine($"Id: {player.id}\tName: {player.name}\tScore: " +
+                              $"{player.experience}\tposX: {player.x}\tposY: {player.y}");
         }
 
-        static void shopTest()
-        {
-            Shop shop = new Shop(new Receiver());
-            shop.addToCart(new Item(0, "HP", PotionType.health, 50));
-            shop.addToCart(new Item(0, "HP", PotionType.health, 50));
-            shop.addToCart(new Item(0, "HP", PotionType.health, 50));
-            shop.addToSell(new Item(0, "HP", PotionType.health, 50));
-            shop.addToSell(new Item(0, "HP", PotionType.health, 50));
-            shop.addToSell(new Item(0, "HP", PotionType.health, 50));
-            shop.execute();
-            shop.execute();
-        }
-
-
-        static void ShowProduct(Player player)
-        {
-            //Console.WriteLine($"Id: {player.Id}\tName: {player.Name}\tScore: " +
-                              //$"{player.Score}\tposX: {player.PosX}\tposY: {player.PosY}");
-        }
-
-        static async Task<Uri> CreatePlayerAsync(Player player)
+        static async Task<Uri> CreatePlayerAsync(Player2 player)
         {
             HttpResponseMessage response = await client.PostAsJsonAsync(
                 requestUri, player);
             response.EnsureSuccessStatusCode();
 
             // Deserialize the updated product from the response body.
-            Player player2 = await response.Content.ReadAsAsync<Player>();
-            if(player2 != null){
+            Player2 player2 = await response.Content.ReadAsAsync<Player2>();
+            if (player2 != null)
+            {
                 ShowProduct(player2);
-            } 
+            }
 
             // return URI of the created resource.
             return response.Headers.Location;
         }
 
-        static async Task<ICollection<Player>> GetAllPlayerAsync(string path)
+        static async Task<ICollection<Player2>> GetAllPlayerAsync(string path)
         {
-            ICollection<Player> players = null;
+            ICollection<Player2> players = null;
             HttpResponseMessage response = await client.GetAsync(path + "api/player");
             if (response.IsSuccessStatusCode)
             {
-                players = await response.Content.ReadAsAsync<ICollection<Player>>();
+                players = await response.Content.ReadAsAsync<ICollection<Player2>>();
             }
             return players;
         }
 
-        static async Task<Player> GetPlayerAsync(string path)
+        static async Task<Player2> GetPlayerAsync(string path)
         {
-            Player player = null;
+            Player2 player = null;
             HttpResponseMessage response = await client.GetAsync(path);
             if (response.IsSuccessStatusCode)
             {
-                player = await response.Content.ReadAsAsync<Player>();
+                player = await response.Content.ReadAsAsync<Player2>();
             }
             return player;
         }
 
-        static async Task<HttpStatusCode> UpdatePlayerAsync(Player player)
+        static async Task<HttpStatusCode> UpdatePlayerAsync(Player2 player)
         {
             HttpResponseMessage response = await client.PutAsJsonAsync(
                 requestUri + $"{player.id}", player);
@@ -122,12 +96,16 @@ namespace GameClient
             return response.StatusCode;
         }
 
-
+        static void Main()
+        {
+            Console.WriteLine("Web API Client says: \"Hello World!\"");
+            RunAsync().GetAwaiter().GetResult();
+        }
 
         static async Task RunAsync()
         {
             // Update port # in the following line.
-            client.BaseAddress = new Uri("https://gameserver.azurewebsites.net/"); //api /player/");
+            client.BaseAddress = new Uri("https://localhost:44371"); //api /player/");
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue(mediaType));
@@ -136,8 +114,8 @@ namespace GameClient
             {
                 // Get all players
                 Console.WriteLine("0)\tGet all player");
-                ICollection<Player> playersList = await GetAllPlayerAsync(client.BaseAddress.PathAndQuery);
-                foreach (Player p in playersList)
+                ICollection<Player2> playersList = await GetAllPlayerAsync(client.BaseAddress.PathAndQuery);
+                foreach (Player2 p in playersList)
                 {
                     ShowProduct(p);
                 }
@@ -145,7 +123,18 @@ namespace GameClient
 
                 // Create a new player
                 Console.WriteLine("1.1)\tCreate the player");
-                /*
+                Player2 player = new Player2
+                {
+                    x = 1,
+                    y = 2, 
+                    name = "tadas",
+                    hitpoints = 10,
+                    attack = 1,
+                    defence = 1,
+                    level = 1,
+                    experience = 0,
+                    gold = 4
+                };
 
                 var url = await CreatePlayerAsync(player);
                 Console.WriteLine($"Created at {url}");
@@ -156,7 +145,7 @@ namespace GameClient
                 ShowProduct(player);
 
                 Console.WriteLine("2.1)\tFull Update the player's score");
-                player.Score = 80;
+                player.x = 80;
                 var updateStatusCode = await UpdatePlayerAsync(player);
                 Console.WriteLine($"Updated (HTTP Status = {(int)updateStatusCode})");
 
@@ -165,30 +154,20 @@ namespace GameClient
                 player = await GetPlayerAsync(url.PathAndQuery);
                 ShowProduct(player);
 
-                //Partial update - patch - of the player
-                Console.WriteLine("3.1)\tPatch Update the player's score");
-                Coordinates coordinates = new Coordinates
-                {
-                    Id = player.Id,
-                    PosX = player.PosX + 10,
-                    PosY = player.PosY + 15
-                };
-                var patchStatusCode = await PatchPlayerAsync(coordinates);
-                Console.WriteLine($"Patched (HTTP Status = {(int)patchStatusCode})");
-
-                // Get the patched  player
-                Console.WriteLine("3.2)\tGet patched player");
-                player = await GetPlayerAsync(url.PathAndQuery);
-                ShowProduct(player);
-
                 //Create player for deletion
                 Console.WriteLine("4.1)\tCreate the player for deletion");
-                Player delPlayer = new Player
+
+                Player2 delPlayer = new Player2
                 {
-                    Name = "StudentasDel-" + (playersList.Count+1).ToString(),
-                    Score = 444,
-                    PosX = 444,
-                    PosY = 444
+                    x = 1,
+                    y = 2,
+                    name = "tadas",
+                    hitpoints = 10,
+                    attack = 1,
+                    defence = 1,
+                    level = 1,
+                    experience = 0,
+                    gold = 4
                 };
                 var url4Del = await CreatePlayerAsync(delPlayer);
                 Console.WriteLine($"Created at {url4Del}");
@@ -200,7 +179,7 @@ namespace GameClient
 
                 // Delete the player
                 Console.WriteLine("4.3)\tDelete the player");
-                var statusCode = await DeletePlayerAsync(delPlayer.Id);
+                var statusCode = await DeletePlayerAsync(delPlayer.id);
                 Console.WriteLine($"Deleted (HTTP Status = {(int)statusCode})");
 
                 //check if deletion was successful
@@ -208,7 +187,7 @@ namespace GameClient
                 delPlayer = await GetPlayerAsync(url4Del.PathAndQuery);
                 ShowProduct(delPlayer);
 
-                Console.WriteLine("Web API Client says: \"GoodBy!\"");*/
+                Console.WriteLine("Web API Client says: \"GoodBy!\"");
 
             }
             catch (Exception e)

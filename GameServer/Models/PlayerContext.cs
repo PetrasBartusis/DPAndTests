@@ -9,7 +9,7 @@ namespace GameServer.Models
         {
         }
 
-        public DbSet<Player> Players { get; set; }
+        public DbSet<Player2> Players2 { get; set; }
     }
 }
 
