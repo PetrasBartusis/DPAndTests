@@ -39,3 +39,21 @@ Thumbs.db
 
 # dotCover
 *.dotCover
+
+MD Generated Files/ArrayList<Entity>\.cs
+
+MD Generated Files/List<Effect>\.cs
+
+MD Generated Files/List<EnemyParty>\.cs
+
+MD Generated Files/List<Entity>\.cs
+
+MD Generated Files/List<Item>\.cs
+
+MD Generated Files/List<Items>\.cs
+
+MD Generated Files/List<Player>\.cs
+
+MD Generated Files/Map<EnemyType, int>\.cs
+
+MD Generated Files/Map<EnemyType,int>\.cs
