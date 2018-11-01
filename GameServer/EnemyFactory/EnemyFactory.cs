@@ -1,46 +1,46 @@
-
-
-using GameServer.Models;
 /**
-* @(#) EnemyFactory.cs
-*/
+ * @(#) EnemyFactory.cs
+ */
+
+using System;
+
 namespace GameServer.EnemyFactory
 {
 	public abstract class EnemyFactory
 	{
-		public Entity createSpider( int difficultyLevel )
+		public virtual Entity createSpider( int difficultyLevel )
 		{
-            return new Entity("Fart", 15, 1, 1);
+            throw new InvalidOperationException("Unimplemented factory function");
 		}
 		
-		public Entity createGoblin( int difficultyLevel )
+		public virtual Entity createGoblin( int difficultyLevel )
         {
-            return new Entity("Fart", 15, 1, 1);
+            throw new InvalidOperationException("Unimplemented factory function");
+        }
+
+        public virtual Entity createElemental(int difficultyLevel)
+        {
+            throw new InvalidOperationException("Unimplemented factory function");
         }
 		
-		public Entity createElemental( int difficultyLevel )
+		public virtual Entity createDragon( int difficultyLevel )
         {
-            return new Entity("Fart", 15, 1, 1);
+            throw new InvalidOperationException("Unimplemented factory function");
         }
 		
-		public Entity createDragon( int difficultyLevel )
+		public virtual Entity createSlime( int difficultyLevel )
         {
-            return new Entity("Fart", 15, 1, 1);
+            throw new InvalidOperationException("Unimplemented factory function");
         }
 		
-		public Entity createSlime( int difficultyLevel )
+		public virtual Entity createDemon( int difficultyLevel )
         {
-            return new Entity("Fart", 15, 1, 1);
+            throw new InvalidOperationException("Unimplemented factory function");
         }
 		
-		public Entity createDemon( int difficultyLevel )
+		public virtual Entity createSkeleton( int difficultyLevel )
         {
-            return new Entity("Fart", 15, 1, 1);
-        }
-		
-		public Entity createSkeleton( int difficultyLevel )
-        {
-            return new Entity("Fart", 15, 1, 1);
+            throw new InvalidOperationException("Unimplemented factory function");
         }
 		
 	}
