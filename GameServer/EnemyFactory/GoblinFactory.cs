@@ -6,9 +6,9 @@ using System;
 
 namespace GameServer.EnemyFactory
 {
-    public class GoblinFactory : EnemyFactory
+    public class GoblinFactory
     {
-        public override Entity createGoblin(int difficultyLevel)
+        public Entity createGoblin(int difficultyLevel)
         {
             Entity enemy;
             const int ATT = 2;

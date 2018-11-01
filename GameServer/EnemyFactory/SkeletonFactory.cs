@@ -4,7 +4,7 @@
 
 namespace GameServer.EnemyFactory
 {
-	public class SkeletonFactory : EnemyFactory
+	public class SkeletonFactory
 	{
 	}
 	
