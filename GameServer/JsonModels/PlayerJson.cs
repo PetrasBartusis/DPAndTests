@@ -7,7 +7,7 @@ using System.Collections.Generic;
 */
 namespace GameServer.Models
 {
-	public class Player2
+	public class PlayerJson
 	{
 		public int level { get; set; }
 
@@ -30,7 +30,7 @@ namespace GameServer.Models
         public long x { get; set; }
         public long y { get; set; }
 
-        public Player2()
+        public PlayerJson()
         {
         }
 

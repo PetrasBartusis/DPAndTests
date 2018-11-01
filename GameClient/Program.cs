@@ -18,20 +18,20 @@ namespace GameClient
         static string requestUri = "api/player/";
         static string mediaType = "application/json";
 
-        static void ShowProduct(Player2 player)
+        static void ShowProduct(PlayerJson player)
         {
             Console.WriteLine($"Id: {player.id}\tName: {player.name}\tScore: " +
                               $"{player.experience}\tposX: {player.x}\tposY: {player.y}");
         }
 
-        static async Task<Uri> CreatePlayerAsync(Player2 player)
+        static async Task<Uri> CreatePlayerAsync(PlayerJson player)
         {
             HttpResponseMessage response = await client.PostAsJsonAsync(
                 requestUri, player);
             response.EnsureSuccessStatusCode();
 
             // Deserialize the updated product from the response body.
-            Player2 player2 = await response.Content.ReadAsAsync<Player2>();
+            PlayerJson player2 = await response.Content.ReadAsAsync<PlayerJson>();
             if (player2 != null)
             {
                 ShowProduct(player2);
@@ -41,29 +41,29 @@ namespace GameClient
             return response.Headers.Location;
         }
 
-        static async Task<ICollection<Player2>> GetAllPlayerAsync(string path)
+        static async Task<ICollection<PlayerJson>> GetAllPlayerAsync(string path)
         {
-            ICollection<Player2> players = null;
+            ICollection<PlayerJson> players = null;
             HttpResponseMessage response = await client.GetAsync(path + "api/player");
             if (response.IsSuccessStatusCode)
             {
-                players = await response.Content.ReadAsAsync<ICollection<Player2>>();
+                players = await response.Content.ReadAsAsync<ICollection<PlayerJson>>();
             }
             return players;
         }
 
-        static async Task<Player2> GetPlayerAsync(string path)
+        static async Task<PlayerJson> GetPlayerAsync(string path)
         {
-            Player2 player = null;
+            PlayerJson player = null;
             HttpResponseMessage response = await client.GetAsync(path);
             if (response.IsSuccessStatusCode)
             {
-                player = await response.Content.ReadAsAsync<Player2>();
+                player = await response.Content.ReadAsAsync<PlayerJson>();
             }
             return player;
         }
 
-        static async Task<HttpStatusCode> UpdatePlayerAsync(Player2 player)
+        static async Task<HttpStatusCode> UpdatePlayerAsync(PlayerJson player)
         {
             HttpResponseMessage response = await client.PutAsJsonAsync(
                 requestUri + $"{player.id}", player);
@@ -114,8 +114,8 @@ namespace GameClient
             {
                 // Get all players
                 Console.WriteLine("0)\tGet all player");
-                ICollection<Player2> playersList = await GetAllPlayerAsync(client.BaseAddress.PathAndQuery);
-                foreach (Player2 p in playersList)
+                ICollection<PlayerJson> playersList = await GetAllPlayerAsync(client.BaseAddress.PathAndQuery);
+                foreach (PlayerJson p in playersList)
                 {
                     ShowProduct(p);
                 }
@@ -123,7 +123,7 @@ namespace GameClient
 
                 // Create a new player
                 Console.WriteLine("1.1)\tCreate the player");
-                Player2 player = new Player2
+                PlayerJson player = new PlayerJson
                 {
                     x = 1,
                     y = 2, 
@@ -157,7 +157,7 @@ namespace GameClient
                 //Create player for deletion
                 Console.WriteLine("4.1)\tCreate the player for deletion");
 
-                Player2 delPlayer = new Player2
+                PlayerJson delPlayer = new PlayerJson
                 {
                     x = 1,
                     y = 2,
