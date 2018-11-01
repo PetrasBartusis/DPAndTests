@@ -17,7 +17,7 @@ namespace GameServer.Strategy
 		
 		LinkedList<Item> items;
 
-        int count;
+        int itemCount;
 
         public Player(string n, int hp, int a, int d, int level, int experience, int gold) : base(n, hp, a, d)
         {
@@ -25,27 +25,27 @@ namespace GameServer.Strategy
             this.experience = experience;
             this.gold = gold;
             this.items = new LinkedList<Item>();
-            count = 0;
+            itemCount = 0;
         }
 
         public void addItem(Item item)
         {
             items.AddLast(item);
-            count++;
+            itemCount++;
         }
 
-        internal void damagePlayer(int damage)
+        public void damagePlayer(int damage)
         {
             setHp(this.currentHitpoints - damage);
         }
 
         public void useItem(string name)
         {
-            Item[] arr = new Item[count];
+            Item[] arr = new Item[itemCount];
             items.CopyTo(arr, 0);
             foreach (Item item in arr)
             {
-                if (name.Equals(item.getName()))
+                if (name.Equals(item.name))
                 {
                     item.useEffect(this);
                     items.Remove(item);
@@ -60,7 +60,6 @@ namespace GameServer.Strategy
         }
 
         public void setHp(int hitpoints) => this.currentHitpoints = hitpoints;
-
         public int getHp() => this.currentHitpoints;
 
         public int getMaxHp() => this.hitpoints;

@@ -10,7 +10,6 @@ namespace ClassDiagram.GameClient
     {
         public PlayerDecorator(MapComponent mapComponent) : base(mapComponent)
         {
-            
         }
 
         public override void draw(int x, int y)

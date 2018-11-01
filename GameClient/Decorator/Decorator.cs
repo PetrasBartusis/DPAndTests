@@ -11,10 +11,6 @@ namespace ClassDiagram.GameClient
 	{
 		protected MapComponent mapComponent;
 
-        public void drawPlayer(int x, int y)
-        {
-            
-        }
         public Decorator(MapComponent mapComponent)
         {
             this.mapComponent = mapComponent;

@@ -8,7 +8,7 @@ namespace GameServer.Strategy
 	{
 		int id;
 
-        string name;
+        public string name { get; private set; }
 		
 		int price;
 
@@ -39,11 +39,7 @@ namespace GameServer.Strategy
                     break;
             }
         }
-        
-        public string getName()
-        {
-            return name;
-        }
+
 	}
 	
 }
