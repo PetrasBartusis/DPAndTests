@@ -1,10 +1,16 @@
 using System.Collections.Generic;
 using GameServer.Models;
 
-namespace GameClient.Shop
+namespace GameClient.ShopModule
 {
     public class AddToSell : ShoppingCommand
     {
+        public AddToSell(Receiver receiver)
+        {
+            this.receiver = receiver;
+            items = new List<Item>();
+        }
+
         Receiver receiver;
 
         List<Item> items;
@@ -16,7 +22,8 @@ namespace GameClient.Shop
 
         public void execute()
         {
-            throw new System.NotImplementedException();
+            receiver.SellItems(items);
+            items.Clear();
         }
 
         public void removeItem(Item item)
