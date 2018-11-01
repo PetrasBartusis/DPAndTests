@@ -1,7 +1,4 @@
-using GameServer.EnemyBuilder;
 using GameServer.Models;
-using GameServer;
-using GameServer.EnemyFactory;
 
 namespace GameServer.EnemyBuilder
 {
@@ -14,63 +11,34 @@ namespace GameServer.EnemyBuilder
 
         private EnemyParty enemyParty;
 
-        IEnemyPartyBuilder startNew(int id, Position p)
+        IEnemyPartyBuilder IEnemyPartyBuilder.StartNew(int id, Position p)
         {
             enemyParty = new EnemyParty(id, p);
             return this;
         }
-
-        EnemyParty build() => enemyParty;
-
-        public IEnemyPartyBuilder addEnemy(EnemyType type, int difficultyLevel)
+        public IEnemyPartyBuilder AddEnemy(int difficultyLevel)
         {
-            switch (type)
+            switch (difficultyLevel % 3)
             {
-                case EnemyType.goblin:
-                    enemyParty.addEnemy(factory.createGoblin(difficultyLevel));
+                case 0:
+                    enemyParty.addEnemy(factory.createWeakEnemy());
                     break;
 
-                case EnemyType.spider:
-                    enemyParty.addEnemy(factory.createSpider(difficultyLevel));
+                case 1:
+                    enemyParty.addEnemy(factory.createWeakEnemy());
                     break;
 
-                case EnemyType.elemental:
-                    enemyParty.addEnemy(factory.createElemental(difficultyLevel));
+                case 2:
+                    enemyParty.addEnemy(factory.createWeakEnemy());
                     break;
-
-                case EnemyType.dragon:
-                    enemyParty.addEnemy(factory.createDragon(difficultyLevel));
-                    break;
-
-                case EnemyType.slime:
-                    enemyParty.addEnemy(factory.createSlime(difficultyLevel));
-                    break;
-
-                case EnemyType.skeleton:
-                    enemyParty.addEnemy(factory.createSkeleton(difficultyLevel));
-                    break;
-
-                case EnemyType.demon:
-                    enemyParty.addEnemy(factory.createDemon(difficultyLevel));
+                default:
+                    enemyParty.addEnemy(factory.createWeakEnemy());
                     break;
             }
 
             return this;
         }
 
-        IEnemyPartyBuilder IEnemyPartyBuilder.startNew(int id, Position p)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        EnemyParty IEnemyPartyBuilder.build()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        IEnemyPartyBuilder IEnemyPartyBuilder.addEnemy(EnemyType type, int difficultyLevel)
-        {
-            throw new System.NotImplementedException();
-        }
+        EnemyParty IEnemyPartyBuilder.Build() => enemyParty;
     }
 }

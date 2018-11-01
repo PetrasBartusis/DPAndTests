@@ -2,6 +2,7 @@
 
 using System.Collections.Generic;
 using GameServer.EnemyFactory;
+using GameServer.Models;
 /**
 * @(#) EnemyCreatorAdapter.cs
 */
@@ -9,35 +10,25 @@ namespace GameServer.EnemyBuilder
 {
 	public class EnemyCreatorAdapter : IEnemyCreator
 	{
-		EnemyPartyDirector enemyPartyDirector;
-		
-        EnemyFactory.EnemyFactory enemyFactory;
+		private EnemyPartyDirector enemyPartyDirector;
 
-        public EnemyParty createEnemies()
+        public EnemyCreatorAdapter(EnemyPartyDirector enemyPartyDirector)
         {
-            throw new System.NotImplementedException();
+            this.enemyPartyDirector = enemyPartyDirector;
         }
 
-        public EnemyParty getEnemyParty(  )
-		{
-			return null;
-		}
-		
-		public EnemyParty getEnemyParty( EnemyType type, int difficulty )
-		{
-			return null;
-		}
-		
-		public EnemyParty getEnemyParty( EnemyType type, int size, int difficulty )
-		{
-			return null;
-		}
-		
-		public EnemyParty getEnemyParty( Dictionary<EnemyType,int> party, int difficultyLevel )
-		{
-			return null;
-		}
-		
-	}
+        public EnemyParty GetEnemyParty(int id, Position position)
+        {
+            return enemyPartyDirector.construct(5, 3, position, id);
+        }
+        public EnemyParty GetEnemyParty(int id, int dificultyLevel, Position position)
+        {
+            return enemyPartyDirector.construct(dificultyLevel, 3, position, id);
+        }
+        public EnemyParty GetEnemyParty(int id, int dificultyLevel, int partySize, Position position)
+        {
+            return enemyPartyDirector.construct(dificultyLevel, 3, position, id);
+        }
+    }
 	
 }

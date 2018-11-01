@@ -5,11 +5,11 @@ namespace GameServer.EnemyBuilder
 {
     public interface IEnemyPartyBuilder
     {
-        IEnemyPartyBuilder startNew(int id, Position p);
+        IEnemyPartyBuilder StartNew(int id, Position p);
+        IEnemyPartyBuilder AddEnemy(int difficultyLevel);
 
-        EnemyParty build();
+        EnemyParty Build();
 
-        IEnemyPartyBuilder addEnemy(EnemyType type, int difficultyLevel);
 
     }
 }
