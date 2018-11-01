@@ -1,3 +1,4 @@
+using GameServer.EnemyFactory;
 using GameServer.Models;
 
 namespace GameServer.EnemyBuilder

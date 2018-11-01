@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using GameServer.EnemyFactory;
 using GameServer.Models;
 
 namespace GameServer.EnemyBuilder
@@ -6,7 +7,7 @@ namespace GameServer.EnemyBuilder
 	public class EnemyPartyDirector
 	{
 
-        //public EnemyPartyDirector(EnemyFactory factory) => builder = new EnemyBuilder(factory);
+        public EnemyPartyDirector(EnemyFactory.EnemyFactory factory) => builder = new EnemyPartyBuilder(factory);
 
         private IEnemyPartyBuilder builder;
 		

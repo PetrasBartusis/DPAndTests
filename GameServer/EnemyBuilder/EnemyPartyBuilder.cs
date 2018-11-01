@@ -1,14 +1,16 @@
 using GameServer.EnemyBuilder;
 using GameServer.Models;
+using GameServer;
+using GameServer.EnemyFactory;
 
 namespace GameServer.EnemyBuilder
 {
     public class EnemyPartyBuilder : IEnemyPartyBuilder
     {
 
-        //EnemyPartyBuilder(EnemyFactory factory) => this.factory = factory;
+        public EnemyPartyBuilder(EnemyFactory.EnemyFactory factory) => this.factory = factory;
 
-        //private EnemyFactory factory;
+        private EnemyFactory.EnemyFactory factory;
 
         private EnemyParty enemyParty;
 
@@ -20,38 +22,38 @@ namespace GameServer.EnemyBuilder
 
         EnemyParty build() => enemyParty;
 
-        IEnemyPartyBuilder addEnemy(EnemyType type, int difficultyLevel)
+        public IEnemyPartyBuilder addEnemy(EnemyType type, int difficultyLevel)
         {
-            //switch (type)
-            //{
-            //    case EnemyType.goblin:
-            //        enemyParty.addEnemy(factory.createGoblin(difficultyLevel));
-            //        break;
+            switch (type)
+            {
+                case EnemyType.goblin:
+                    enemyParty.addEnemy(factory.createGoblin(difficultyLevel));
+                    break;
 
-            //    case EnemyType.spider:
-            //        enemyParty.addEnemy(factory.createSpider(difficultyLevel));
-            //        break;
+                case EnemyType.spider:
+                    enemyParty.addEnemy(factory.createSpider(difficultyLevel));
+                    break;
 
-            //    case EnemyType.elemental:
-            //        enemyParty.addEnemy(factory.createElemental(difficultyLevel));
-            //        break;
+                case EnemyType.elemental:
+                    enemyParty.addEnemy(factory.createElemental(difficultyLevel));
+                    break;
 
-            //    case EnemyType.dragon:
-            //        enemyParty.addEnemy(factory.createDragon(difficultyLevel));
-            //        break;
+                case EnemyType.dragon:
+                    enemyParty.addEnemy(factory.createDragon(difficultyLevel));
+                    break;
 
-            //    case EnemyType.slime:
-            //        enemyParty.addEnemy(factory.createSlime(difficultyLevel));
-            //        break;
+                case EnemyType.slime:
+                    enemyParty.addEnemy(factory.createSlime(difficultyLevel));
+                    break;
 
-            //    case EnemyType.skeleton:
-            //        enemyParty.addEnemy(factory.createSkeleton(difficultyLevel));
-            //        break;
+                case EnemyType.skeleton:
+                    enemyParty.addEnemy(factory.createSkeleton(difficultyLevel));
+                    break;
 
-            //    case EnemyType.demon:
-            //        enemyParty.addEnemy(factory.createDemon(difficultyLevel));
-            //        break;
-            //}
+                case EnemyType.demon:
+                    enemyParty.addEnemy(factory.createDemon(difficultyLevel));
+                    break;
+            }
 
             return this;
         }

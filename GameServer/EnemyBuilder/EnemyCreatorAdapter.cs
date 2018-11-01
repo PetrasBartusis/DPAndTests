@@ -1,35 +1,43 @@
-///**
-// * @(#) EnemyCreatorAdapter.cs
-// */
 
-//namespace GameServer.EnemyBuilder
-//{
-//	public class EnemyCreatorAdapter : IEnemyCreator
-//	{
-//		ClassDiagram.EnemyPartyBuilder.EnemyPartyDirector enemyPartyDirector;
+
+using System.Collections.Generic;
+using GameServer.EnemyFactory;
+/**
+* @(#) EnemyCreatorAdapter.cs
+*/
+namespace GameServer.EnemyBuilder
+{
+	public class EnemyCreatorAdapter : IEnemyCreator
+	{
+		EnemyPartyDirector enemyPartyDirector;
 		
-//		ClassDiagram.EnemyFactory.EnemyFactory enemyFactory;
+        EnemyFactory.EnemyFactory enemyFactory;
+
+        public EnemyParty createEnemies()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public EnemyParty getEnemyParty(  )
+		{
+			return null;
+		}
 		
-//		public ClassDiagram.EnemyPartyBuilder.EnemyParty getEnemyParty(  )
-//		{
-//			return null;
-//		}
+		public EnemyParty getEnemyParty( EnemyType type, int difficulty )
+		{
+			return null;
+		}
 		
-//		public ClassDiagram.EnemyPartyBuilder.EnemyParty getEnemyParty( ClassDiagram.EnemyFactory.EnemyType type, int difficulty )
-//		{
-//			return null;
-//		}
+		public EnemyParty getEnemyParty( EnemyType type, int size, int difficulty )
+		{
+			return null;
+		}
 		
-//		public ClassDiagram.EnemyPartyBuilder.EnemyParty getEnemyParty( ClassDiagram.EnemyFactory.EnemyType type, int size, int difficulty )
-//		{
-//			return null;
-//		}
+		public EnemyParty getEnemyParty( Dictionary<EnemyType,int> party, int difficultyLevel )
+		{
+			return null;
+		}
 		
-//		public ClassDiagram.EnemyPartyBuilder.EnemyParty getEnemyParty( Map<EnemyType,int> party, int difficultyLevel )
-//		{
-//			return null;
-//		}
-		
-//	}
+	}
 	
-//}
+}
