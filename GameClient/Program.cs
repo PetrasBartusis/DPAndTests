@@ -20,6 +20,7 @@ namespace GameClient
 
         static void Main()
         {
+
             EmptyMapComponent e = new EmptyMapComponent();
             e.draw(0,0);
             PlayerDecorator pd = new PlayerDecorator(e);
@@ -33,8 +34,8 @@ namespace GameClient
 
         static void ShowProduct(Player player)
         {
-            Console.WriteLine($"Id: {player.Id}\tName: {player.Name}\tScore: " +
-                              $"{player.Score}\tposX: {player.PosX}\tposY: {player.PosY}");
+            //Console.WriteLine($"Id: {player.Id}\tName: {player.Name}\tScore: " +
+                              //$"{player.Score}\tposX: {player.PosX}\tposY: {player.PosY}");
         }
 
         static async Task<Uri> CreatePlayerAsync(Player player)

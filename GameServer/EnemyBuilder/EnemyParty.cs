@@ -1,12 +1,17 @@
+
+using System.Collections.Generic;
+using GameServer.Models;
+using GameServer.Strategy;
+
 namespace GameServer.EnemyBuilder
 {
     public class EnemyParty
     {
-        List<Entity> enemies { get; private set; }
+        private List<Entity> enemies;
 
-        Position position { get; private set; }
+        private Position position;
 
-        int id { get; private set; }
+        public int id { get; private set; }
 
         public EnemyParty(int id, Position p)
         {
@@ -15,8 +20,10 @@ namespace GameServer.EnemyBuilder
             enemies = new List<Entity>();
         }
 
-        public void addEnemy(Entity enemy) => enemies.add(enemy);
-
+        public void addEnemy(Entity enemy)
+        {
+            enemies.Add(enemy);
+        }
     }
 }
 

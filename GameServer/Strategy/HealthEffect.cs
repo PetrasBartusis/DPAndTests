@@ -1,7 +1,9 @@
-/**
- * @(#) HealthEffect.cs
- */
 
+
+using GameServer.Models;
+/**
+* @(#) HealthEffect.cs
+*/
 namespace GameServer.Strategy
 {
 	public class HealthEffect : Effect

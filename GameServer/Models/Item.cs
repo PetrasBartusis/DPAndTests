@@ -1,8 +1,10 @@
-/**
- * @(#) Item.cs
- */
 
-namespace GameServer.Strategy
+
+using GameServer.Strategy;
+/**
+* @(#) Item.cs
+*/
+namespace GameServer.Models
 {
 	public class Item
 	{

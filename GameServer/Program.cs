@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using GameServer.Strategy;
+using GameServer.Models;
 
 namespace GameServer
 {

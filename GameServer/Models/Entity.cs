@@ -2,7 +2,7 @@
  * @(#) Entity.cs
  */
 
-namespace GameServer.Strategy
+namespace GameServer.Models
 {
 	public class Entity
 	{

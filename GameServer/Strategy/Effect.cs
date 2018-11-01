@@ -1,6 +1,7 @@
 /**
  * @(#) Effect.cs
  */
+using GameServer.Models;
 
 namespace GameServer.Strategy
 {
