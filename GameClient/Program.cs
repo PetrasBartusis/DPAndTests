@@ -77,11 +77,35 @@ namespace GameClient
             Console.WriteLine();
         }
 
+        static void PrototypeShow()
+        {
+            Console.WriteLine("PROTOTYPE:");
+            Player p = new Player(1, 2, 2, "TestPlayer", 10, 5, 3, 1, 0, 0);
+            Console.WriteLine(p.ToString());
+            p.addKill();
+            p.addKill();
+            p.addKill();
+            Console.WriteLine(p.ToString());
+            Console.WriteLine();
+            Player shallowCopy = (Player)p.Clone();
+            Console.WriteLine();
+            Player deepCopy = (Player)p.DeepClone();
+            Console.WriteLine();
+            p.addKill();
+            p.addKill();
+            p.addKill();
+            Console.WriteLine("Shallow copy:");
+            Console.WriteLine(shallowCopy.ToString());
+            Console.WriteLine("Deep copy:");
+            Console.WriteLine(deepCopy.ToString());
+        }
+
         static void Main()
         {
             BuilderShow(new EnemyCreatorAdapter(new EnemyPartyDirector(new GrassEnvironmentFactory()), LevelType.GRASS));
             //StrategyShow();
-            ShopShow();
+            PrototypeShow();
+            //ShopShow();
             Console.ReadKey();
 
 

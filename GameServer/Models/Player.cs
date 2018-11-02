@@ -8,7 +8,7 @@ using System.Text;
 */
 namespace GameServer.Models
 {
-	public class Player : Entity
+	public class Player : Entity, ICloneable
 	{
 		public int level { get; set; }
 
@@ -21,6 +21,8 @@ namespace GameServer.Models
         public int y;
         public int id;
 
+        public KillCounter kc;
+
         int itemCount;
 
         public Player(int id, int x, int y, string name, int hitpoints, int attack, int defence, int level, int experience, int gold) : base(name, hitpoints, attack, defence)
@@ -32,6 +34,12 @@ namespace GameServer.Models
             itemCount = 0;
             this.x = x;
             this.y = y;
+            kc = new KillCounter();
+        }
+
+        public void addKill()
+        {
+            kc.Increment();
         }
 
         public void addItem(Item item)
@@ -79,7 +87,7 @@ namespace GameServer.Models
             {
                 output.Append(i.ToString()).Append("\n");
             }
-            return output.ToString();
+            return output.Append("KillCount: ").Append(kc.killCount).ToString();
         }
 
         public void setHp(int hitpoints) => this.currentHitpoints = hitpoints;
@@ -93,6 +101,16 @@ namespace GameServer.Models
         public int setAttack(int attack) => this.attack = attack;
         public int getAttack() => this.attack;
 
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
+        public object DeepClone()
+        {
+            Player p = (Player) this.MemberwiseClone();
+            p.kc = (KillCounter)kc.Clone();
+            return p;
+        }
     }
 
 }
