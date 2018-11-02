@@ -23,19 +23,19 @@ namespace GameServer.Controllers
         public EnemyController(EnemyContext context)
         {
             this.context = context;
-            this.enemyCreator = new EnemyCreatorAdapter(new EnemyPartyDirector(new GrassEnvironmentFactory()));
-            createEnemies();
+            //this.enemyCreator = new EnemyCreatorAdapter(new EnemyPartyDirector(new GrassEnvironmentFactory()));
+            //createEnemies();
         }
 
         public List<EnemyParty> createEnemies()
         {
             List<EnemyParty> enemies = new List<EnemyParty>();
-            enemies.Add(enemyCreator.GetEnemyParty(0, new Coordinates(0, 0)));
+            /*enemies.Add(enemyCreator.GetEnemyParty(0, new Coordinates(0, 0)));
             enemies.Add(enemyCreator.GetEnemyParty(1, new Coordinates(4, 4)));
             foreach (EnemyParty p in enemies)
             {
                 context.enemyParties.Add(EnemyConverter.createEnemyPartyJson(p));
-            }
+            }*/
             return enemies;
         }
         // GET api/enemy

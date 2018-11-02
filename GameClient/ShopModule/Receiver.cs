@@ -1,5 +1,6 @@
 
 
+using GameServer;
 using GameServer.Models;
 using System;
 using System.Collections.Generic;
@@ -10,27 +11,30 @@ namespace GameClient.ShopModule
 {
 	public class Receiver
 	{
+        private string Tag = "Receiver";
         public void PurchaseItems(List<Item> items)
         {
+            LoggerLazy.getInstance().log(Tag, "PurchaseItems");
             if (items == null || items.Count == 0)
             {
-                Console.WriteLine("No items selected to buy");
+                LoggerLazy.getInstance().log(Tag, "No items selected to buy");
             }
             else
             {
-                Console.WriteLine("Buying was success");
+                LoggerLazy.getInstance().log(Tag, "Buying was success");
             }
         }
 
         public void SellItems(List<Item> items)
         {
+            LoggerLazy.getInstance().log(Tag, "SellItems");
             if (items == null || items.Count == 0)
             {
-                Console.WriteLine("No items selected to sell");
+                LoggerLazy.getInstance().log(Tag, "No items selected to sell");
             }
             else
             {
-                Console.WriteLine("Selling was success");
+                LoggerLazy.getInstance().log(Tag, "Selling was success");
             }
         }
     }

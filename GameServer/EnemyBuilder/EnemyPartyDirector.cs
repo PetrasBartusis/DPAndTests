@@ -11,6 +11,10 @@ namespace GameServer.EnemyBuilder
 
         private IEnemyPartyBuilder builder;
 
+        public void setFactory(EnemyFactory.EnemyFactory factory)
+        {
+            builder.setFactory(factory);
+        }
         public EnemyParty construct(int difficultyLevel, int enemyCnt, Coordinates p)
         {
             builder.StartNew(p);

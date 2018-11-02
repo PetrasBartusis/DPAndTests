@@ -8,6 +8,7 @@ namespace GameServer.EnemyBuilder
         IEnemyPartyBuilder StartNew(Coordinates p);
         IEnemyPartyBuilder AddEnemy(int difficultyLevel);
 
+        void setFactory(EnemyFactory.EnemyFactory factory);
         EnemyParty Build();
 
 
