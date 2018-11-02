@@ -1,25 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace GameServer.EnemyFactory
 {
     public class ForestEnvirnmentFactory : EnemyFactory
     {
+        public ForestEnvirnmentFactory() { }
+
         public override Entity createAvarageEnemy()
         {
-            throw new NotImplementedException();
+            return SpiderFactory.createSpider(SpiderTypes.giant, EnemyFactory.DIFF_MEDIUM);
         }
 
         public override Entity createStrongEnemy()
         {
-            throw new NotImplementedException();
+            return GoblinFactory.createGoblin(GoblinTypes.warrior, EnemyFactory.DIFF_HIGH);
         }
 
         public override Entity createWeakEnemy()
         {
-            throw new NotImplementedException();
+            return GoblinFactory.createGoblin(GoblinTypes.rogue, EnemyFactory.DIFF_LOW);
         }
     }
 }
