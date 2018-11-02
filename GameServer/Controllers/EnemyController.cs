@@ -23,7 +23,7 @@ namespace GameServer.Controllers
         public EnemyController(EnemyContext context)
         {
             this.context = context;
-            this.enemyCreator = new EnemyCreatorAdapter(new EnemyPartyDirector(new GrassEnvirnmentFactory()));
+            this.enemyCreator = new EnemyCreatorAdapter(new EnemyPartyDirector(new GrassEnvironmentFactory()));
             createEnemies();
         }
 

@@ -4,6 +4,7 @@ namespace GameServer.EnemyFactory
     public enum SpiderTypes
     {
         normal,
-        giant
+        giant,
+        poison
     }
 }

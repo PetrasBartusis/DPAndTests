@@ -91,7 +91,7 @@ namespace GameClient
 
         public static List<EnemyParty> createEnemies()
         {
-            IEnemyCreator enemyCreator = new EnemyCreatorAdapter(new EnemyPartyDirector(new GrassEnvirnmentFactory()));
+            IEnemyCreator enemyCreator = new EnemyCreatorAdapter(new EnemyPartyDirector(new GrassEnvironmentFactory()));
             List<EnemyParty> enemies = new List<EnemyParty>();
             enemies.Add(enemyCreator.GetEnemyParty(0, new Coordinates(0, 0)));
             enemies.Add(enemyCreator.GetEnemyParty(1, new Coordinates(4, 4)));

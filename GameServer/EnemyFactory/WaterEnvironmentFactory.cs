@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace GameServer.EnemyFactory
 {
-    public class GraveyardEnvirnmentFactory : EnemyFactory
+    public class WaterEnvironmentFactory : EnemyFactory
     {
         public override Entity createAvarageEnemy()
         {

@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 namespace GameServer.EnemyFactory
 {
-    public class GrassEnvirnmentFactory : EnemyFactory
+    public class GrassEnvironmentFactory : EnemyFactory
     {
-        public GrassEnvirnmentFactory() { }
+        public GrassEnvironmentFactory() { }
 
         public override Entity createAvarageEnemy()
         {
