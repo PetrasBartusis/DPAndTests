@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 /**
 * @(#) Player.cs
 */
@@ -16,15 +17,21 @@ namespace GameServer.Models
         public int gold { get; set; }
         private List<Item> items;
 
+        public int x;
+        public int y;
+        public int id;
+
         int itemCount;
 
-        public Player(int id, int x, int y, string name, int hitpoints, int attack, int defence, int level, int experience, int gold) : base(id, x, y, name, hitpoints, attack, defence)
+        public Player(int id, int x, int y, string name, int hitpoints, int attack, int defence, int level, int experience, int gold) : base(name, hitpoints, attack, defence)
         {
             this.level = level;
             this.experience = experience;
             this.gold = gold;
             this.items = new List<Item>();
             itemCount = 0;
+            this.x = x;
+            this.y = y;
         }
 
         public void addItem(Item item)
@@ -66,7 +73,13 @@ namespace GameServer.Models
 
         public override string ToString()
         {
-            return string.Format("Player hp  = {0}, Player attack  = {1}, Player defence  = {2},", currentHitpoints, attack, defence);
+            StringBuilder output = new StringBuilder(base.ToString());
+            output.Append("\n");
+            foreach(Item i in items)
+            {
+                output.Append(i.ToString()).Append("\n");
+            }
+            return output.ToString();
         }
 
         public void setHp(int hitpoints) => this.currentHitpoints = hitpoints;

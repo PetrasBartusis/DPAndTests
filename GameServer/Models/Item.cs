@@ -1,6 +1,7 @@
 
 
 using GameServer.Strategy;
+using System.Text;
 /**
 * @(#) Item.cs
 */
@@ -43,6 +44,10 @@ namespace GameServer.Models
             }
         }
 
-	}
+        public override string ToString()
+        {
+            return new StringBuilder("Item name = ").Append(name).Append(", price = ").Append(price).ToString();
+        }
+    }
 	
 }

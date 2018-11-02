@@ -1,5 +1,7 @@
 
+using System;
 using System.Collections.Generic;
+using System.Text;
 using GameServer.Models;
 using GameServer.Strategy;
 
@@ -25,6 +27,18 @@ namespace GameServer.EnemyBuilder
         public void addEnemy(Entity enemy)
         {
             enemies.Add(enemy);
+        }
+
+        public override string ToString()
+        {
+            StringBuilder builder = new StringBuilder();
+            builder.Append(string.Format("{2}***Enemy Party in position [{0}, {1}]***{2}", position.x, position.y, Environment.NewLine));
+            foreach(Entity e in enemies)
+            {
+                builder.Append("+++").Append(e.ToString()).Append(Environment.NewLine);
+            }
+            builder.Append("***   ***").Append(Environment.NewLine);
+            return builder.ToString();
         }
     }
 }

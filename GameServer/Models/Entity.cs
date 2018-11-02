@@ -2,7 +2,7 @@
  * @(#) Entity.cs
  */
 
-namespace GameServer.Models
+/*namespace GameServer.Models
 {
     public class Entity: Coordinates
     {
@@ -30,4 +30,4 @@ namespace GameServer.Models
 		
 	}
 	
-}
+}*/

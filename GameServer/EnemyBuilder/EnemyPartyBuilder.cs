@@ -25,11 +25,11 @@ namespace GameServer.EnemyBuilder
                     break;
 
                 case 1:
-                    enemyParty.addEnemy(factory.createWeakEnemy());
+                    enemyParty.addEnemy(factory.createAvarageEnemy());
                     break;
 
                 case 2:
-                    enemyParty.addEnemy(factory.createWeakEnemy());
+                    enemyParty.addEnemy(factory.createStrongEnemy());
                     break;
                 default:
                     enemyParty.addEnemy(factory.createWeakEnemy());

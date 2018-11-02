@@ -28,13 +28,52 @@ namespace GameClient
                               $"{player.experience}\tposX: {player.x}\tposY: {player.y}");
         }
 
+        static void BuilderShow(IEnemyCreator enemyCreator)
+        {
+            List<EnemyParty> enemies = new List<EnemyParty>();
+            enemies.Add(enemyCreator.GetEnemyParty(0, new Coordinates(0, 0)));
+            enemies.Add(enemyCreator.GetEnemyParty(1, new Coordinates(0, 4)));
+            enemies.Add(enemyCreator.GetEnemyParty(1, new Coordinates(1, 4)));
+            enemies.Add(enemyCreator.GetEnemyParty(1, new Coordinates(2, 4)));
+            enemies.Add(enemyCreator.GetEnemyParty(1, new Coordinates(3, 4)));
+            enemies.Add(enemyCreator.GetEnemyParty(1, new Coordinates(4, 4)));
+            foreach (EnemyParty p in enemies)
+            {
+                Console.WriteLine(p.ToString());
+            }
+        }
 
+        static void StrategyShow()
+        {
+            Player p = new Player(1, 2, 2, "TestPlayer", 10, 5, 3, 1, 0, 0);
+            p.addItem(new Item(1, "MINOR HEALTH POTION", PotionType.health, 10));
+            p.addItem(new Item(1, "BUFF POTION", PotionType.buff, 20));
+            p.addItem(new Item(1, "DAMAGE POTION", PotionType.damage, 5));
+            Console.WriteLine(p.ToString());
+            Console.WriteLine();
+            p.damagePlayer(8);
+            Console.WriteLine(p.ToString());
+            Console.WriteLine();
+            p.useItem("MINOR HEALTH POTION");
+            Console.WriteLine(p.ToString());
+            Console.WriteLine();
+            p.useItem("BUFF POTION");
+            Console.WriteLine(p.ToString());
+            Console.WriteLine();
+            p.useItem("DAMAGE POTION");
+            Console.WriteLine(p.ToString());
+            Console.WriteLine();
+        }
 
         static void Main()
         {
-            createEnemies();
-            Console.WriteLine("Web API Client says: \"Hello World!\"");
-            RunAsync().GetAwaiter().GetResult();
+            //BuilderShow(new EnemyCreatorAdapter(new EnemyPartyDirector(new GrassEnvirnmentFactory())));
+            //StrategyShow();
+            Console.ReadKey();
+
+
+            /*Console.WriteLine("Web API Client says: \"Hello World!\"");
+            RunAsync().GetAwaiter().GetResult();*/
         }
 
         public static List<EnemyParty> createEnemies()
