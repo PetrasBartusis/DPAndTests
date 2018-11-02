@@ -27,6 +27,18 @@ namespace GameClient
             Console.WriteLine($"Id: {player.id}\tName: {player.name}\tScore: " +
                               $"{player.experience}\tposX: {player.x}\tposY: {player.y}");
         }
+        static void ShopShow()
+        {
+            Shop shop = new Shop(new Receiver());
+            shop.addToCart(new Item(0, "HP", PotionType.health, 50));
+            shop.addToCart(new Item(0, "BF", PotionType.buff, 75));
+            shop.addToCart(new Item(0, "DMG", PotionType.damage, 40));
+            shop.addToSell(new Item(0, "HP low", PotionType.health, 15));
+            shop.addToSell(new Item(0, "BF low", PotionType.buff, 10));
+            shop.addToSell(new Item(0, "DMG low", PotionType.damage, 20));
+            shop.execute();
+            shop.execute();
+        }
 
         static void BuilderShow(IEnemyCreator enemyCreator)
         {
@@ -69,6 +81,7 @@ namespace GameClient
         {
             //BuilderShow(new EnemyCreatorAdapter(new EnemyPartyDirector(new GrassEnvirnmentFactory())));
             //StrategyShow();
+            ShopShow();
             Console.ReadKey();
 
 
