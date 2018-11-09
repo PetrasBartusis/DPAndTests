@@ -2,21 +2,46 @@
 using GameClient;
 using GameServer;
 using GameServer.Models;
+using System.Threading.Tasks;
 
 namespace UnitTestProject1
 {
     [TestClass]
     public class SVTest
     {
+
+        static WebService ws = new WebService();
+
         [TestMethod]
-        public async void Test_PlayerCreation_NewPlayer()
+        public async Task Test_PlayerCreation_NewPlayer()
+        { 
+            PlayerJson player = CreatePlayer("Jonas");
+            var url = await ws.CreatePlayerAsync(player);
+            PlayerJson playerFromServer = await ws.GetPlayerAsync(url.PathAndQuery);
+            ComparePlayers(player, playerFromServer);
+        }
+
+        [TestMethod]
+        public async Task Test_Player_Movement()
         {
-            WebService ws = new WebService();
-            PlayerJson player = new PlayerJson
+            PlayerJson player = CreatePlayer("Karolis");
+            var url = await ws.CreatePlayerAsync(player);
+            player = await ws.GetPlayerAsync(url.PathAndQuery);
+            player.x += 1;
+            var updateStatusCode = await ws.UpdatePlayerAsync(player);
+            PlayerJson playerFromServer = await ws.GetPlayerAsync(url.PathAndQuery);
+            //ComparePlayers(player, playerFromServer);
+            Assert.AreEqual(player.x, playerFromServer.x);
+            Assert.AreEqual(player.y, playerFromServer.y);
+        }
+
+        private PlayerJson CreatePlayer(string n)
+        {
+            return new PlayerJson
             {
                 x = 1,
                 y = 2,
-                name = "tadas",
+                name = n,
                 hitpoints = 10,
                 attack = 1,
                 defence = 1,
@@ -24,9 +49,19 @@ namespace UnitTestProject1
                 experience = 0,
                 gold = 4
             };
-            var url = await ws.CreatePlayerAsync(player);
-            PlayerJson playerFromServer = await ws.GetPlayerAsync(url.PathAndQuery);
+        }
+
+        private void ComparePlayers(PlayerJson player, PlayerJson playerFromServer)
+        {
             Assert.AreEqual(player.x, playerFromServer.x);
+            Assert.AreEqual(player.y, playerFromServer.y);
+            Assert.AreEqual(player.name, playerFromServer.name);
+            Assert.AreEqual(player.hitpoints, playerFromServer.hitpoints);
+            Assert.AreEqual(player.attack, playerFromServer.attack);
+            Assert.AreEqual(player.defence, playerFromServer.defence);
+            Assert.AreEqual(player.level, playerFromServer.level);
+            Assert.AreEqual(player.experience, playerFromServer.experience);
+            Assert.AreEqual(player.gold, playerFromServer.gold);
         }
     }
 }

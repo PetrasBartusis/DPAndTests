@@ -6,7 +6,7 @@ using System.Text;
 */
 namespace GameClient.Decorator
 {
-    class PlayerDecorator : Decorator
+    public class PlayerDecorator : Decorator
     {
         public PlayerDecorator(MapComponent mapComponent) : base(mapComponent)
         {
