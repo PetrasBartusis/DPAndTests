@@ -1,6 +1,9 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using GameClient;
 using GameServer;
+using GameClient.Decorator;
+using GameServer.Models;
+using System.Threading.Tasks;
 
 namespace UnitTestProject1
 {
@@ -10,7 +13,8 @@ namespace UnitTestProject1
         [TestMethod]
         public void TestMethod1()
         {
-             
+            
+
         }
     }
 }
