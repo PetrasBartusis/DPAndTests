@@ -21,22 +21,27 @@ namespace UnitTestProject1
         Player p = new Player(1, 2, 2, "TestPlayer", maxHitpoints, attack, defence, 1, 0, 0);
 
         [TestMethod]
-        public void Test_Strategy_ItemEffects()
+        [DataRow(PotionType.health, 8, 2, 7, 5, 3)]
+        [DataRow(PotionType.health, 3, 7, 10, 5, 3)]
+        [DataRow(PotionType.buff, 3, 7, 7, 6, 4)]
+        public void Test_Strategy_ItemEffects(PotionType type, 
+            int damageToPlayer, 
+            int expectedHpBeforePotion, 
+            int expectedHpAfterPotion,
+            int expectedAttack,
+            int expectedDefence)
         {
-
+            String name = "Potion";
             
-            p.addItem(new Item(1, "MINOR HEALTH POTION", PotionType.health, 10));
-            p.addItem(new Item(1, "BUFF POTION", PotionType.buff, 20));
-            p.addItem(new Item(1, "DAMAGE POTION", PotionType.damage, 5));
+            p.addItem(new Item(1, name, type, 10));
             p.damagePlayer(damageToPlayer);
             //10 - 8 = 2
-            Assert.AreEqual(p.currentHitpoints, maxHitpoints - damageToPlayer);
-            p.useItem("MINOR HEALTH POTION");
+            Assert.AreEqual(p.currentHitpoints, expectedHpBeforePotion, "Player doesn't receive damage");
+            p.useItem(name);
             //2 + 5 = 7
-            Assert.AreEqual(p.currentHitpoints, maxHitpoints - damageToPlayer + hpPotion);
-            p.useItem("BUFF POTION");
-            Assert.AreEqual(p.attack, attack + 1);
-            Assert.AreEqual(p.defence, defence + 1);
+            Assert.AreEqual(p.currentHitpoints, expectedHpAfterPotion, "Player hp is not expected");
+            Assert.AreEqual(p.attack, expectedAttack, "Player attack is not expected");
+            Assert.AreEqual(p.defence, expectedDefence, "Player defence is not expected");
         }
 
 
