@@ -33,25 +33,20 @@ namespace GameServer.EnemyBuilder
                     break;
             }
         }
-        public EnemyCreatorAdapter(EnemyPartyDirector enemyPartyDirector, LevelType type)
+        public EnemyCreatorAdapter()
         {
-            this.enemyPartyDirector = enemyPartyDirector;
+            this.enemyPartyDirector = new EnemyPartyDirector();
         }
 
         public EnemyParty GetEnemyParty(Coordinates position, LevelType type)
         {
             setFactory(type);
-            return enemyPartyDirector.construct(5, 3, position);
+            return enemyPartyDirector.construct(5, position);
         }
         public EnemyParty GetEnemyParty(int dificultyLevel, Coordinates position, LevelType type)
         {
             setFactory(type);
-            return enemyPartyDirector.construct(dificultyLevel, 3, position);
-        }
-        public EnemyParty GetEnemyParty(int dificultyLevel, int partySize, Coordinates position, LevelType type)
-        {
-            setFactory(type);
-            return enemyPartyDirector.construct(dificultyLevel, 3, position);
+            return enemyPartyDirector.construct(dificultyLevel, position);
         }
     }
 

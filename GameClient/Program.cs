@@ -43,12 +43,12 @@ namespace GameClient
         static void BuilderShow(IEnemyCreator enemyCreator)
         {
             List<EnemyParty> enemies = new List<EnemyParty>();
-            enemies.Add(enemyCreator.GetEnemyParty(0, 4, new Coordinates(0, 0), LevelType.GRASS));
-            enemies.Add(enemyCreator.GetEnemyParty(1, 5, new Coordinates(0, 4), LevelType.GRASS));
-            enemies.Add(enemyCreator.GetEnemyParty(0, 4, new Coordinates(1, 4), LevelType.FOREST));
-            enemies.Add(enemyCreator.GetEnemyParty(1, 5, new Coordinates(2, 4), LevelType.FOREST));
-            enemies.Add(enemyCreator.GetEnemyParty(0, 4, new Coordinates(3, 4), LevelType.FIRE));
-            enemies.Add(enemyCreator.GetEnemyParty(1, 5, new Coordinates(4, 4), LevelType.FIRE));
+            enemies.Add(enemyCreator.GetEnemyParty(4, new Coordinates(0, 0), LevelType.GRASS));
+            enemies.Add(enemyCreator.GetEnemyParty(5, new Coordinates(0, 4), LevelType.GRASS));
+            enemies.Add(enemyCreator.GetEnemyParty(4, new Coordinates(1, 4), LevelType.FOREST));
+            enemies.Add(enemyCreator.GetEnemyParty(5, new Coordinates(2, 4), LevelType.FOREST));
+            enemies.Add(enemyCreator.GetEnemyParty(4, new Coordinates(3, 4), LevelType.FIRE));
+            enemies.Add(enemyCreator.GetEnemyParty(5, new Coordinates(4, 4), LevelType.FIRE));
             foreach (EnemyParty p in enemies)
             {
                 Console.WriteLine(p.ToString());
@@ -102,7 +102,7 @@ namespace GameClient
 
         static void Main()
         {
-            BuilderShow(new EnemyCreatorAdapter(new EnemyPartyDirector(new GrassEnvironmentFactory()), LevelType.GRASS));
+            BuilderShow(new EnemyCreatorAdapter());
             //StrategyShow();
             PrototypeShow();
             //ShopShow();
@@ -115,7 +115,7 @@ namespace GameClient
 
         public static List<EnemyParty> createEnemies()
         {
-            IEnemyCreator enemyCreator = new EnemyCreatorAdapter(new EnemyPartyDirector(new GrassEnvironmentFactory()), LevelType.GRASS);
+            IEnemyCreator enemyCreator = new EnemyCreatorAdapter();
             List<EnemyParty> enemies = new List<EnemyParty>();
             enemies.Add(enemyCreator.GetEnemyParty(0, new Coordinates(0, 0), LevelType.GRASS));
             enemies.Add(enemyCreator.GetEnemyParty(1, new Coordinates(4, 4), LevelType.GREVEYARD));

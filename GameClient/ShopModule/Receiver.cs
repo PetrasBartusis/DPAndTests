@@ -9,7 +9,7 @@ using System.Collections.Generic;
 */
 namespace GameClient.ShopModule
 {
-	public class Receiver
+	public class Receiver : IReceiver
 	{
         private string Tag = "Receiver";
         public void PurchaseItems(List<Item> items)

@@ -5,7 +5,7 @@ namespace GameClient.ShopModule
 {
     public class AddToSell : ShoppingCommand
     {
-        public AddToSell(Receiver receiver)
+        public AddToSell(IReceiver receiver)
         {
             this.receiver = receiver;
             items = new List<Item>();

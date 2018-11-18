@@ -10,7 +10,7 @@ namespace GameClient.ShopModule
 	public class Shop
 	{
         private string Tag = "Shop";
-        public Shop(Receiver receiver)
+        public Shop(IReceiver receiver)
         {
             cart = new AddToCart(receiver);
             sell = new AddToSell(receiver);

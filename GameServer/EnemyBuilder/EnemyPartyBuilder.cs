@@ -5,7 +5,6 @@ namespace GameServer.EnemyBuilder
     public class EnemyPartyBuilder : IEnemyPartyBuilder
     {
         private static string Tag = "EnemyPartyBuilder";
-        public EnemyPartyBuilder(EnemyFactory.EnemyFactory factory) => this.factory = factory;
 
         private EnemyFactory.EnemyFactory factory;
 

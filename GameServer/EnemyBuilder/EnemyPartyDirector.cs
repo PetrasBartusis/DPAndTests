@@ -7,7 +7,7 @@ namespace GameServer.EnemyBuilder
 {
     public class EnemyPartyDirector
     {
-        public EnemyPartyDirector(EnemyFactory.EnemyFactory factory) => builder = new EnemyPartyBuilder(factory);
+        public EnemyPartyDirector() => builder = new EnemyPartyBuilder();
 
         private IEnemyPartyBuilder builder;
 
@@ -15,12 +15,12 @@ namespace GameServer.EnemyBuilder
         {
             builder.setFactory(factory);
         }
-        public EnemyParty construct(int difficultyLevel, int enemyCnt, Coordinates p)
+        public EnemyParty construct(int difficultyLevel, Coordinates p)
         {
             builder.StartNew(p);
-            for (int i = 0; i < enemyCnt; i++)
+            for (; difficultyLevel > 0; difficultyLevel--)
             {
-                builder.AddEnemy(difficultyLevel++);
+                builder.AddEnemy(difficultyLevel);
             }
             return builder.Build();
         }
