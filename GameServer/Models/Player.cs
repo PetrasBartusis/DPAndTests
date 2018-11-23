@@ -47,6 +47,10 @@ namespace GameServer.Models
             items.Add(item);
             itemCount++;
         }
+        public IReadOnlyCollection<Item> getItems()
+        {
+            return items.AsReadOnly();
+        }
 
         public void damagePlayer(int damage)
         {
@@ -103,12 +107,21 @@ namespace GameServer.Models
 
         public object Clone()
         {
-            return this.MemberwiseClone();
+            Player p = (Player)this.MemberwiseClone();
+            p.kc = new KillCounter();
+            p.items = new List<Item>();
+            return p;
         }
         public object DeepClone()
         {
             Player p = (Player) this.MemberwiseClone();
             p.kc = (KillCounter)kc.Clone();
+            p.items = new List<Item>();
+            foreach (var item in items)
+            {
+                p.items.Add((Item)item.Clone());
+            }
+
             return p;
         }
     }

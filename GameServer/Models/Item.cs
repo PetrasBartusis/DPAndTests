@@ -1,13 +1,14 @@
 
 
 using GameServer.Strategy;
+using System;
 using System.Text;
 /**
 * @(#) Item.cs
 */
 namespace GameServer.Models
 {
-	public class Item
+	public class Item : ICloneable
 	{
 		int id;
 
@@ -47,6 +48,12 @@ namespace GameServer.Models
         public override string ToString()
         {
             return new StringBuilder("Item name = ").Append(name).Append(", price = ").Append(price).ToString();
+        }
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+            // TODO copy effects
         }
     }
 	

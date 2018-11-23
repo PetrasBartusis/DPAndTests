@@ -18,13 +18,13 @@ namespace GameServer.EnemyFactory
             {
                 default:
                 case ElementalTypes.air:
-                    enemy = new Enemies.AirElemental("air", 10, ATT, DEF); break;
+                    enemy = new Enemies.AirElemental("air", 10, difficultyLevel * ATT, difficultyLevel * DEF); break;
                 case ElementalTypes.earth:
-                    enemy = new Enemies.EarthElemental("earth", 10, ATT, DEF); break;
+                    enemy = new Enemies.EarthElemental("earth", 10, difficultyLevel * ATT, difficultyLevel * DEF); break;
                 case ElementalTypes.fire:
-                    enemy = new Enemies.FireElemental("fire", 10, ATT, DEF); break;
+                    enemy = new Enemies.FireElemental("fire", 10, difficultyLevel * ATT, difficultyLevel * DEF); break;
                 case ElementalTypes.water:
-                    enemy = new Enemies.WaterElemental("water", 10, ATT, DEF); break;
+                    enemy = new Enemies.WaterElemental("water", 10, difficultyLevel * ATT, difficultyLevel * DEF); break;
             }
             return enemy;
         }

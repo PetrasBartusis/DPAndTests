@@ -9,7 +9,7 @@ using System.Text;
 namespace UnitTestProject1
 {
     [TestClass]
-    class DZTests
+    public class DZTests
     {
         [TestMethod]
         [DataRow(1,5,0,0, LevelType.FOREST)]

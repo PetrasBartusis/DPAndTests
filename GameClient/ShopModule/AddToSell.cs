@@ -11,7 +11,7 @@ namespace GameClient.ShopModule
             items = new List<Item>();
         }
 
-        Receiver receiver;
+        IReceiver receiver;
 
         List<Item> items;
 
