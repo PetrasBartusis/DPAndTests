@@ -173,16 +173,28 @@ namespace GameClient
                     switch (key)
                     {
                         case 'w':
-                            player.y -= 1;
+                            if(player.y > 0 && player.y < 10)
+                            {
+                                player.y -= 1;
+                            }
                             break;
                         case 'd':
-                            player.x += 1;
+                            if (player.x > 0 && player.x < 10)
+                            {
+                                player.x += 1;
+                            }
                             break;
                         case 's':
-                            player.y += 1;
+                            if (player.y > 0 && player.y < 10)
+                            {
+                                player.y += 1;
+                            }
                             break;
                         case 'a':
-                            player.x -= 1;
+                            if (player.x > 0 && player.x < 10)
+                            {
+                                player.x -= 1;
+                            }
                             break;
                     }
 
