@@ -18,9 +18,9 @@ namespace GameServer.EnemyBuilder
         public EnemyParty construct(int difficultyLevel, Coordinates p)
         {
             builder.StartNew(p);
-            for (; difficultyLevel > 0; difficultyLevel--)
+            for (int pSize = difficultyLevel / 3; pSize > 0; pSize--)
             {
-                builder.AddEnemy(difficultyLevel);
+                builder.AddEnemy(difficultyLevel--);
             }
             return builder.Build();
         }
