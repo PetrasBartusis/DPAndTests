@@ -21,5 +21,12 @@ namespace GameClient.CompositeAndInterpreter
             stats[2] = def;
             stats[3] = money;
         }
+        public Stats(int s)
+        {
+            stats[0] = s;
+            stats[1] = s;
+            stats[2] = s;
+            stats[3] = s;
+        }
     }
 }

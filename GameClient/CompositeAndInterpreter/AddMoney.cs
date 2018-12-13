@@ -9,21 +9,23 @@ namespace GameClient.CompositeAndInterpreter
 {
 	public class AddMoney : CheatComponent
 	{
-	    private CheatComponent p;
-	    private int val;
+        private CheatComponent exp1;
+        private CheatComponent exp2;
 
-	    public int[] getStats()
-	    {
-	        int[] values = p.getStats();
-	        values[3] = values[3] + val;
-	        return values;
-	    }
+        public int[] getStats()
+        {
+            int[] values = exp1.getStats();
+            int[] add = exp2.getStats();
 
-	    public AddMoney(CheatComponent stats, int val)
-	    {
-	        p = stats;
-	        this.val = val;
-	    }
-	}
+            values[3] = values[3] + add[3];
+            return values;
+        }
+
+        public AddMoney(CheatComponent stats, CheatComponent val)
+        {
+            exp1 = stats;
+            this.exp2 = val;
+        }
+    }
 	
 }

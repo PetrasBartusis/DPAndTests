@@ -6,20 +6,22 @@ namespace GameClient.CompositeAndInterpreter
 {
 	public class AddAttack : CheatComponent
 	{
-	    private CheatComponent p;
-	    private int val;
+	    private CheatComponent exp1;
+	    private CheatComponent exp2;
 
 	    public int[] getStats()
 	    {
-	        int[] values = p.getStats();
-	        values[1] = values[1] + val;
+	        int[] values = exp1.getStats();
+            int[] add = exp2.getStats();
+
+            values[1] = values[1] + add[1]; ;
 	        return values;
 	    }
 
-	    public AddAttack(CheatComponent stats, int val)
+	    public AddAttack(CheatComponent stats, CheatComponent val)
 	    {
-	        p = stats;
-	        this.val = val;
+	        exp1 = stats;
+	        this.exp2 = val;
 	    }
     }
 	

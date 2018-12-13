@@ -12,22 +12,22 @@ namespace GameClient.CompositeAndInterpreter
 		
 		public Player lifeCheat( Player p, int s )
 		{
-            CheatComponent cheat = new AddLife(playerToStats(p), s);
+            CheatComponent cheat = new AddLife(playerToStats(p), new Stats(s));
 		    return setPlayerStats(p, cheat.getStats());
         }
 	    public Player defenceCheat(Player p, int s)
 	    {
-	        CheatComponent cheat = new AddDefence(playerToStats(p), s);
+	        CheatComponent cheat = new AddDefence(playerToStats(p), new Stats(s));
 	        return setPlayerStats(p, cheat.getStats());
         }
 	    public Player attackCheat(Player p, int s)
 	    {
-	        CheatComponent cheat = new AddAttack(playerToStats(p), s);
+	        CheatComponent cheat = new AddAttack(playerToStats(p), new Stats(s));
 	        return setPlayerStats(p, cheat.getStats());
         }
 	    public Player moneyCheat(Player p, int s)
 	    {
-	        CheatComponent cheat = new AddMoney(playerToStats(p), s);
+	        CheatComponent cheat = new AddMoney(playerToStats(p), new Stats(s));
 
             return setPlayerStats(p, cheat.getStats());
 	    }
@@ -36,10 +36,10 @@ namespace GameClient.CompositeAndInterpreter
 	    {
 
 	        CheatComposite cheat = new CheatComposite(playerToStats(p));
-	        CheatComponent c1 = new AddLife(emptyStats(), s);
-	        CheatComponent c2 = new AddAttack(emptyStats(), s);
-	        CheatComponent c3 = new AddDefence(emptyStats(), s);
-	        CheatComponent c4 = new AddMoney(emptyStats(), s);
+	        CheatComponent c1 = new AddLife(emptyStats(), new Stats(s));
+	        CheatComponent c2 = new AddAttack(emptyStats(), new Stats(s));
+	        CheatComponent c3 = new AddDefence(emptyStats(), new Stats(s));
+	        CheatComponent c4 = new AddMoney(emptyStats(), new Stats(s));
 
             cheat.AddCheat(c1);
 	        cheat.AddCheat(c2);
