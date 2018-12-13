@@ -1,6 +1,7 @@
 
 
 using GameServer.Strategy;
+using GameServer.Visitor;
 using System;
 using System.Text;
 /**
@@ -18,12 +19,14 @@ namespace GameServer.Models
 
         Effect effect;
 
+        EffectStrength es;
+
         public void useEffect(Player player)
         {
-            effect.use(player);
+            effect.use(player, es);
         }
 		
-        public Item(int id, string name, PotionType type, int price)
+        public Item(int id, string name, PotionType type, int price, EffectStrength es)
         {
             this.id = id;
             this.name = name;
@@ -43,6 +46,7 @@ namespace GameServer.Models
                     effect = new HealthEffect();
                     break;
             }
+            this.es = es;
         }
 
         public override string ToString()

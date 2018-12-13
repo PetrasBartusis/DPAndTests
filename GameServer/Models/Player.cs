@@ -59,7 +59,7 @@ namespace GameServer.Models
 
         public void useItem(string name)
         {
-            Item[] arr = new Item[itemCount];
+            Item[] arr = new Item[items.Count];
             items.CopyTo(arr, 0);
             foreach (Item item in arr)
             {

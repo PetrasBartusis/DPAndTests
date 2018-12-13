@@ -11,6 +11,7 @@ using GameClient.ShopModule;
 using GameServer.EnemyBuilder;
 using GameServer.Controllers;
 using GameServer;
+using GameServer.Visitor;
 using GameServer.EnemyFactory;
 
 namespace GameClient
@@ -30,12 +31,12 @@ namespace GameClient
         static void ShopShow()
         {
             Shop shop = new Shop(new Receiver());
-            shop.addToCart(new Item(0, "HP", PotionType.health, 50));
-            shop.addToCart(new Item(0, "BF", PotionType.buff, 75));
-            shop.addToCart(new Item(0, "DMG", PotionType.damage, 40));
-            shop.addToSell(new Item(0, "HP low", PotionType.health, 15));
-            shop.addToSell(new Item(0, "BF low", PotionType.buff, 10));
-            shop.addToSell(new Item(0, "DMG low", PotionType.damage, 20));
+            shop.addToCart(new Item(0, "HP", PotionType.health, 50, new Minor()));
+            shop.addToCart(new Item(0, "BF", PotionType.buff, 75, new Minor()));
+            shop.addToCart(new Item(0, "DMG", PotionType.damage, 40, new Minor()));
+            shop.addToSell(new Item(0, "HP low", PotionType.health, 15, new Minor()));
+            shop.addToSell(new Item(0, "BF low", PotionType.buff, 10, new Minor()));
+            shop.addToSell(new Item(0, "DMG low", PotionType.damage, 20, new Minor()));
             shop.execute();
             shop.execute();
         }
@@ -58,21 +59,32 @@ namespace GameClient
         static void StrategyShow()
         {
             Player p = new Player(1, 2, 2, "TestPlayer", 10, 5, 3, 1, 0, 0);
-            p.addItem(new Item(1, "MINOR HEALTH POTION", PotionType.health, 10));
-            p.addItem(new Item(1, "BUFF POTION", PotionType.buff, 20));
-            p.addItem(new Item(1, "DAMAGE POTION", PotionType.damage, 5));
+            p.addItem(new Item(1, "MINOR HEALTH POTION", PotionType.health, 10, new Minor()));
+            p.addItem(new Item(1, "PLENTIFUL HEALTH POTION", PotionType.health, 10, new Plentiful()));
+            p.addItem(new Item(1, "VIGOROUS HEALTH POTION", PotionType.health, 10, new Vigorous()));
+            p.addItem(new Item(1, "PLENTIFUL BUFF POTION", PotionType.buff, 20, new Minor()));
+            p.addItem(new Item(1, "VIGOROUS DAMAGE POTION", PotionType.damage, 5, new Vigorous()));
             Console.WriteLine(p.ToString());
-            Console.WriteLine();
+            Console.WriteLine("Damage player by 8");
             p.damagePlayer(8);
             Console.WriteLine(p.ToString());
-            Console.WriteLine();
+            Console.WriteLine("Use potion of minor healing");
             p.useItem("MINOR HEALTH POTION");
             Console.WriteLine(p.ToString());
-            Console.WriteLine();
-            p.useItem("BUFF POTION");
+            Console.WriteLine("Use potion of plentiful healing");
+            p.useItem("PLENTIFUL HEALTH POTION");
+
+            Console.WriteLine("Damage player by 4");
+            p.damagePlayer(4);
             Console.WriteLine(p.ToString());
-            Console.WriteLine();
-            p.useItem("DAMAGE POTION");
+            Console.WriteLine("Use potion of vigorous healing");
+            p.useItem("VIGOROUS HEALTH POTION");
+            Console.WriteLine(p.ToString());
+            Console.WriteLine("Use plentiful potion of buffing");
+            p.useItem("PLENTIFUL BUFF POTION");
+            Console.WriteLine(p.ToString());
+            Console.WriteLine("Use vigorous potion of damage");
+            p.useItem("VIGOROUS DAMAGE POTION");
             Console.WriteLine(p.ToString());
             Console.WriteLine();
         }
@@ -103,9 +115,9 @@ namespace GameClient
         static void Main()
         {
             //BuilderShow(new EnemyCreatorAdapter());
-            //StrategyShow();
+            StrategyShow();
             //PrototypeShow();
-            DecoratorShow();
+            //DecoratorShow();
             //ShopShow();
             Console.ReadKey();
 
