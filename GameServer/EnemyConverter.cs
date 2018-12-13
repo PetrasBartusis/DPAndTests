@@ -35,10 +35,10 @@ namespace GameServer
             return new EnemyJson
             {
                 name = e.name,
-                hitpoints = e.hitpoints,
-                currentHitpoints = e.hitpoints,
-                attack = e.attack,
-                defence = e.defence
+                hitpoints = e.Hitpoints,
+                currentHitpoints = e.Hitpoints,
+                attack = e.Attack,
+                defence = e.Defence
             };
         }
 

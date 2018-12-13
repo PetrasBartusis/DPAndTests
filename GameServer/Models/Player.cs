@@ -54,7 +54,7 @@ namespace GameServer.Models
 
         public void damagePlayer(int damage)
         {
-            setHp(this.currentHitpoints - damage);
+            setHp(this.CurrentHitpoints - damage);
         }
 
         public void useItem(string name)
@@ -75,9 +75,9 @@ namespace GameServer.Models
         public void update(string n, int hp, int a, int d, int lv, int xp, int g)
         {
             name = n;
-            hitpoints = hp;
-            attack = a;
-            defence = d;
+            Hitpoints = hp;
+            Attack = a;
+            Defence = d;
             level = lv;
             experience = xp;
             gold = g;
@@ -94,16 +94,16 @@ namespace GameServer.Models
             return output.Append("KillCount: ").Append(kc.killCount).ToString();
         }
 
-        public void setHp(int hitpoints) => this.currentHitpoints = hitpoints;
-        public int getHp() => this.currentHitpoints;
+        public void setHp(int hitpoints) => this.CurrentHitpoints = hitpoints;
+        public int getHp() => this.CurrentHitpoints;
 
-        public int getMaxHp() => this.hitpoints;
+        public int getMaxHp() => this.Hitpoints;
 
-        public int setDefence(int defence) => this.defence = defence;
-        public int getDefence() => this.defence;
+        public int setDefence(int defence) => this.Defence = defence;
+        public int getDefence() => this.Defence;
 
-        public int setAttack(int attack) => this.attack = attack;
-        public int getAttack() => this.attack;
+        public int setAttack(int attack) => this.Attack = attack;
+        public int getAttack() => this.Attack;
 
         public object Clone()
         {

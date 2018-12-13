@@ -46,8 +46,8 @@ namespace UnitTestProject1
                 int targetvalue_att = difficulty * 2;
                 int targetvalue_def = difficulty * 4;
                 Entity ent = GoblinFactory.createGoblin(type, difficulty);
-                int deviation_att = Math.Abs(targetvalue_att - ent.attack);
-                int deviation_def = Math.Abs(targetvalue_def - ent.defence);
+                int deviation_att = Math.Abs(targetvalue_att - ent.Attack);
+                int deviation_def = Math.Abs(targetvalue_def - ent.Defence);
                 Assert.IsTrue(deviation_att <= MaxDeviation_ATT);
                 Assert.IsTrue(deviation_def <= MaxDeviation_DEF);
             }
@@ -87,8 +87,8 @@ namespace UnitTestProject1
                 int targetvalue_att = difficulty * 2;
                 int targetvalue_def = difficulty * 4;
                 Entity ent = ElementalFactory.createElemental(type, difficulty);
-                int deviation_att = Math.Abs(targetvalue_att - ent.attack);
-                int deviation_def = Math.Abs(targetvalue_def - ent.defence);
+                int deviation_att = Math.Abs(targetvalue_att - ent.Attack);
+                int deviation_def = Math.Abs(targetvalue_def - ent.Defence);
                 Assert.IsTrue(deviation_att <= MaxDeviation_ATT);
                 Assert.IsTrue(deviation_def <= MaxDeviation_DEF);
             }
@@ -125,8 +125,8 @@ namespace UnitTestProject1
                 int targetvalue_att = difficulty * 2;
                 int targetvalue_def = difficulty * 4;
                 Entity ent = SpiderFactory.createSpider(type, difficulty);
-                int deviation_att = Math.Abs(targetvalue_att - ent.attack);
-                int deviation_def = Math.Abs(targetvalue_def - ent.defence);
+                int deviation_att = Math.Abs(targetvalue_att - ent.Attack);
+                int deviation_def = Math.Abs(targetvalue_def - ent.Defence);
                 Assert.IsTrue(deviation_att <= MaxDeviation_ATT);
                 Assert.IsTrue(deviation_def <= MaxDeviation_DEF);
             }

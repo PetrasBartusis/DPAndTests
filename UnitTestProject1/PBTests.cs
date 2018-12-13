@@ -36,12 +36,12 @@ namespace UnitTestProject1
             p.addItem(new Item(1, name, type, 10));
             p.damagePlayer(damageToPlayer);
             //10 - 8 = 2
-            Assert.AreEqual(p.currentHitpoints, expectedHpBeforePotion, "Player doesn't receive damage");
+            Assert.AreEqual(p.CurrentHitpoints, expectedHpBeforePotion, "Player doesn't receive damage");
             p.useItem(name);
             //2 + 5 = 7
-            Assert.AreEqual(p.currentHitpoints, expectedHpAfterPotion, "Player hp is not expected");
-            Assert.AreEqual(p.attack, expectedAttack, "Player attack is not expected");
-            Assert.AreEqual(p.defence, expectedDefence, "Player defence is not expected");
+            Assert.AreEqual(p.CurrentHitpoints, expectedHpAfterPotion, "Player hp is not expected");
+            Assert.AreEqual(p.Attack, expectedAttack, "Player attack is not expected");
+            Assert.AreEqual(p.Defence, expectedDefence, "Player defence is not expected");
         }
 
 
