@@ -14,12 +14,15 @@ namespace GameClient.Decorator
 
         public override void draw(int x, int y)
         {
-            StringBuilder currentTile = new StringBuilder(mapComponent.currentMap[y]);
-            currentTile[x] = 'P';
-            currentMap[y] = currentTile.ToString();
+            mapComponent.currentMap.map2DIterator.addEntity('P', x, y);
             mapComponent.draw(0, 0);
         }
 
+        public override void drawDungeon(int x, int y)
+        {
+            mapComponent.dungeon.mapHashTableIterator.addEntity('P', x, y);
+            mapComponent.drawDungeon(0, 0);
+        }
     }
 
 }

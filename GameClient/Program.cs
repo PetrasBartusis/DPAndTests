@@ -102,15 +102,41 @@ namespace GameClient
 
         static void Main()
         {
-            BuilderShow(new EnemyCreatorAdapter());
+            //BuilderShow(new EnemyCreatorAdapter());
             //StrategyShow();
-            PrototypeShow();
+            //PrototypeShow();
+            DecoratorShow();
             //ShopShow();
             Console.ReadKey();
 
 
             /*Console.WriteLine("Web API Client says: \"Hello World!\"");
             RunAsync().GetAwaiter().GetResult();*/
+        }
+
+        private static void DecoratorShow()
+        {
+            PlayerJson player = new PlayerJson
+            {
+                x = 1,
+                y = 2,
+                name = "tadas",
+                hitpoints = 10,
+                attack = 1,
+                defence = 1,
+                level = 1,
+                experience = 0,
+                gold = 4
+            };
+            EmptyMapComponent e = new EmptyMapComponent();
+            e.draw(0, 0);
+            PlayerDecorator pd = new PlayerDecorator(e);
+            pd.draw(Convert.ToInt32(player.x), Convert.ToInt32(player.y));
+            Console.ReadKey();
+            e.drawDungeon(0, 0);
+            pd.drawDungeon(Convert.ToInt32(player.x), Convert.ToInt32(player.y));
+
+            Console.WriteLine("Drew decorator");
         }
 
         public static List<EnemyParty> createEnemies()
@@ -159,11 +185,6 @@ namespace GameClient
                 player = await ws.GetPlayerAsync(url.PathAndQuery);
                 ShowProduct(player);
 
-                // Get the created player
-                Console.WriteLine("1.3)\tGet enemies");
-                ICollection<EnemyPartyJson> enemyPartyJsons = (await ws.GetAllEnemiesAsync());
-                List<EnemyParty> enemyParties = EnemyConverter.createEnemyParties(enemyPartyJsons);
-
                 ConsoleKeyInfo keyInfo = Console.ReadKey();
                 char key = keyInfo.KeyChar;
 
@@ -173,28 +194,16 @@ namespace GameClient
                     switch (key)
                     {
                         case 'w':
-                            if(player.y > 0 && player.y < 10)
-                            {
-                                player.y -= 1;
-                            }
+                            player.y -= 1;
                             break;
                         case 'd':
-                            if (player.x > 0 && player.x < 10)
-                            {
-                                player.x += 1;
-                            }
+                            player.x += 1;
                             break;
                         case 's':
-                            if (player.y > 0 && player.y < 10)
-                            {
-                                player.y += 1;
-                            }
+                            player.y += 1;
                             break;
                         case 'a':
-                            if (player.x > 0 && player.x < 10)
-                            {
-                                player.x -= 1;
-                            }
+                            player.x -= 1;
                             break;
                     }
 
@@ -213,14 +222,11 @@ namespace GameClient
                     PlayerDecorator pd = new PlayerDecorator(e);
                     pd.draw(Convert.ToInt32(player.x), Convert.ToInt32(player.y));
 
-                    EnemyDecorator ed = new EnemyDecorator(e);
-                    foreach (EnemyParty ep in enemyParties)
-                    {
-                        ed.draw(Convert.ToInt32(ep.position.x),Convert.ToInt32(ep.position.y));
-                    }
                     keyInfo = Console.ReadKey();
                     key = keyInfo.KeyChar;
                 }
+
+
 
                 /*
                 // Get all players
