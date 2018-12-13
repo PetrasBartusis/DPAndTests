@@ -1,6 +1,7 @@
 
 
 using GameServer.Models;
+using GameServer.Visitor;
 /**
 * @(#) BuffEffect.cs
 */
@@ -9,10 +10,11 @@ namespace GameServer.Strategy
 	public class BuffEffect : Effect
 	{
 
-        public void use(Player player)
+        public void use(Player player, EffectStrength es)
         {
-            player.setAttack(player.getAttack() + 1);
-            player.setDefence(player.getDefence() + 1);
+            int strength = es.calculateStrength(this);
+            player.setAttack(player.getAttack() + strength);
+            player.setDefence(player.getDefence() + strength);
         }
     }
 	
