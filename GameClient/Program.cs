@@ -13,6 +13,7 @@ using GameServer.Controllers;
 using GameServer;
 using GameServer.Visitor;
 using GameServer.EnemyFactory;
+using GameServer.ChainOfResponsibility;
 
 namespace GameClient
 {
@@ -115,7 +116,8 @@ namespace GameClient
         static void Main()
         {
             //BuilderShow(new EnemyCreatorAdapter());
-            StrategyShow();
+            //StrategyShow();
+            ChainOfResponsibilityShow();
             //PrototypeShow();
             //DecoratorShow();
             //ShopShow();
@@ -124,6 +126,23 @@ namespace GameClient
 
             /*Console.WriteLine("Web API Client says: \"Hello World!\"");
             RunAsync().GetAwaiter().GetResult();*/
+        }
+
+        private static void ChainOfResponsibilityShow()
+        {
+            Player p = new Player(1, 2, 2, "TestPlayer", 10, 5, 3, 1, 0, 600);
+            Console.WriteLine("Player's stats before enchantment:");
+            Console.WriteLine(p.ToString());
+            Enchanter e = new Enchanter(p);
+            if(p.gold > e.enchantmentCost){
+                Console.WriteLine("Starting Enchantment:");
+                e.startEnchantment();
+            } else {
+                Console.WriteLine("You dont have enough money for an enchantment");
+            }
+
+            Console.WriteLine("Player's stats after enchantment:");
+            Console.WriteLine(p.ToString());
         }
 
         private static void DecoratorShow()

@@ -14,7 +14,6 @@ namespace GameClient.Iterator
         int maxLength = 10;
         int curX = 0;
         int curY = 0;
-        char curC = 'G';
 
         public void addEntity(char c, int x, int y)
         {
