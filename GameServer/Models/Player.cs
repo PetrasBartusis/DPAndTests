@@ -74,7 +74,7 @@ namespace GameServer.Models
 
         public void update(string n, int hp, int a, int d, int lv, int xp, int g)
         {
-            name = n;
+            Name = n;
             Hitpoints = hp;
             Attack = a;
             Defence = d;

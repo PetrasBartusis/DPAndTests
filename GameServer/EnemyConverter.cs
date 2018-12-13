@@ -34,7 +34,7 @@ namespace GameServer
         {
             return new EnemyJson
             {
-                name = e.name,
+                name = e.Name,
                 hitpoints = e.Hitpoints,
                 currentHitpoints = e.Hitpoints,
                 attack = e.Attack,

@@ -22,28 +22,28 @@ namespace GameClient.ShopModule
 
         public void addToCart( Item item )
         {
+            caretaker.AddState(new Memento(sell, cart));
             LoggerLazy.getInstance().log(Tag, "addToCart" + item.ToString());
             cart.addItem(item);
-            caretaker.AddState(new Memento(sell, cart));
         }
         public void addToSell(Item item)
         {
+            caretaker.AddState(new Memento(sell, cart));
             LoggerLazy.getInstance().log(Tag, "addToSell" + item.ToString());
             sell.addItem(item);
-            caretaker.AddState(new Memento(sell, cart));
         }
 
         public void removeFromCart(Item item)
         {
+            caretaker.AddState(new Memento(sell, cart));
             LoggerLazy.getInstance().log(Tag, "removeFromCart" + item.ToString());
             cart.removeItem(item);
-            caretaker.AddState(new Memento(sell, cart));
         }
         public void removeFromSell(Item item)
         {
+            caretaker.AddState(new Memento(sell, cart));
             LoggerLazy.getInstance().log(Tag, "removeFromSell" + item.ToString());
             sell.removeItem(item);
-            caretaker.AddState(new Memento(sell, cart));
         }
 
         public void execute(  )

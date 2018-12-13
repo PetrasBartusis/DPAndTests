@@ -31,6 +31,15 @@ namespace GameClient.ShopModule
             items.Remove(item);
         }
 
+        public object Clone()
+        {
+            AddToCart command = new AddToCart(receiver);
+            foreach(Item item in items)
+            {
+                command.addItem(item);
+            }
+            return command;
+        }
     }
 	
 }

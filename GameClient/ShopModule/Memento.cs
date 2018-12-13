@@ -12,8 +12,8 @@ namespace GameClient.ShopModule
 
         public Memento(ShoppingCommand sell, ShoppingCommand buy)
         {
-            SellItems = sell;
-            BuyItems = buy;
+            SellItems = sell.Clone() as ShoppingCommand;
+            BuyItems = buy.Clone() as ShoppingCommand;
         }
 
         public ShoppingCommand BuyItems { get => buyItems; private set => buyItems = value; }

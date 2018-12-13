@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using GameServer.Models;
 
@@ -31,6 +32,15 @@ namespace GameClient.ShopModule
             items.Remove(item);
         }
 
+        public object Clone()
+        {
+            AddToSell command = new AddToSell(receiver);
+            foreach (Item item in items)
+            {
+                command.addItem(item);
+            }
+            return command;
+        }
     }
 
 }

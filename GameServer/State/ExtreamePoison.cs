@@ -10,7 +10,7 @@ namespace GameServer.State
         int i = 1;
         public void Handle(Entity entity)
         {
-            entity.CurrentHitpoints -= (entity.Hitpoints/10)*i++;
+            entity.CurrentHitpoints -= ((entity.Hitpoints / 10) * i++) + 1;
         }
     }
 }
