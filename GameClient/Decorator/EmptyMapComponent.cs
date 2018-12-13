@@ -12,27 +12,49 @@ namespace GameClient.Decorator
         public override void draw(int x, int y)
         {
             Console.Clear();
-            foreach (string line in currentMap)
+            foreach (char c in currentMap)
             {
-                foreach(char c in line)
+                switch (c)
                 {
-                    switch (c)
-                    {
-                        case 'G':
-                            printInColor(ConsoleColor.Green, c);
-                            break;
-                        case 'P':
-                            printInColor(ConsoleColor.Blue, c);
-                            break;
-                        case 'E':
-                            printInColor(ConsoleColor.Red, c);
-                            break;
-                        default:
-                            Console.WriteLine();
-                            break;
-                    }
+                    case 'G':
+                        printInColor(ConsoleColor.Green, c);
+                        break;
+                    case 'P':
+                        printInColor(ConsoleColor.Blue, c);
+                        break;
+                    case 'E':
+                        printInColor(ConsoleColor.Red, c);
+                        break;
+                    default:
+                        Console.WriteLine();
+                        break;
                 }
-                Console.WriteLine();
+            }
+        }
+
+        public override void drawDungeon(int x, int y)
+        {
+            Console.Clear();
+            foreach (char c in dungeon)
+            {
+                switch (c)
+                {
+                    case 'G':
+                        printInColor(ConsoleColor.Green, c);
+                        break;
+                    case 'P':
+                        printInColor(ConsoleColor.Blue, c);
+                        break;
+                    case 'E':
+                        printInColor(ConsoleColor.Red, c);
+                        break;
+                    case 'D':
+                        printInColor(ConsoleColor.Gray, c);
+                        break;
+                    default:
+                        Console.WriteLine();
+                        break;
+                }
             }
         }
 
@@ -41,7 +63,7 @@ namespace GameClient.Decorator
             Console.BackgroundColor = color;
             Console.ForegroundColor = ConsoleColor.White;
             Console.Write("  ");
-            Console.ResetColor();  
+            Console.ResetColor();
         }
     }
 

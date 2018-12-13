@@ -11,7 +11,9 @@ using GameClient.ShopModule;
 using GameServer.EnemyBuilder;
 using GameServer.Controllers;
 using GameServer;
+using GameServer.Visitor;
 using GameServer.EnemyFactory;
+using GameServer.ChainOfResponsibility;
 
 namespace GameClient
 {
@@ -30,12 +32,12 @@ namespace GameClient
         static void ShopShow()
         {
             Shop shop = new Shop(new Receiver());
-            shop.addToCart(new Item(0, "HP", PotionType.health, 50));
-            shop.addToCart(new Item(0, "BF", PotionType.buff, 75));
-            shop.addToCart(new Item(0, "DMG", PotionType.damage, 40));
-            shop.addToSell(new Item(0, "HP low", PotionType.health, 15));
-            shop.addToSell(new Item(0, "BF low", PotionType.buff, 10));
-            shop.addToSell(new Item(0, "DMG low", PotionType.damage, 20));
+            shop.addToCart(new Item(0, "HP", PotionType.health, 50, new Minor()));
+            shop.addToCart(new Item(0, "BF", PotionType.buff, 75, new Minor()));
+            shop.addToCart(new Item(0, "DMG", PotionType.damage, 40, new Minor()));
+            shop.addToSell(new Item(0, "HP low", PotionType.health, 15, new Minor()));
+            shop.addToSell(new Item(0, "BF low", PotionType.buff, 10, new Minor()));
+            shop.addToSell(new Item(0, "DMG low", PotionType.damage, 20, new Minor()));
             shop.execute();
             shop.execute();
         }
@@ -58,21 +60,32 @@ namespace GameClient
         static void StrategyShow()
         {
             Player p = new Player(1, 2, 2, "TestPlayer", 10, 5, 3, 1, 0, 0);
-            p.addItem(new Item(1, "MINOR HEALTH POTION", PotionType.health, 10));
-            p.addItem(new Item(1, "BUFF POTION", PotionType.buff, 20));
-            p.addItem(new Item(1, "DAMAGE POTION", PotionType.damage, 5));
+            p.addItem(new Item(1, "MINOR HEALTH POTION", PotionType.health, 10, new Minor()));
+            p.addItem(new Item(1, "PLENTIFUL HEALTH POTION", PotionType.health, 10, new Plentiful()));
+            p.addItem(new Item(1, "VIGOROUS HEALTH POTION", PotionType.health, 10, new Vigorous()));
+            p.addItem(new Item(1, "PLENTIFUL BUFF POTION", PotionType.buff, 20, new Minor()));
+            p.addItem(new Item(1, "VIGOROUS DAMAGE POTION", PotionType.damage, 5, new Vigorous()));
             Console.WriteLine(p.ToString());
-            Console.WriteLine();
+            Console.WriteLine("Damage player by 8");
             p.damagePlayer(8);
             Console.WriteLine(p.ToString());
-            Console.WriteLine();
+            Console.WriteLine("Use potion of minor healing");
             p.useItem("MINOR HEALTH POTION");
             Console.WriteLine(p.ToString());
-            Console.WriteLine();
-            p.useItem("BUFF POTION");
+            Console.WriteLine("Use potion of plentiful healing");
+            p.useItem("PLENTIFUL HEALTH POTION");
+
+            Console.WriteLine("Damage player by 4");
+            p.damagePlayer(4);
             Console.WriteLine(p.ToString());
-            Console.WriteLine();
-            p.useItem("DAMAGE POTION");
+            Console.WriteLine("Use potion of vigorous healing");
+            p.useItem("VIGOROUS HEALTH POTION");
+            Console.WriteLine(p.ToString());
+            Console.WriteLine("Use plentiful potion of buffing");
+            p.useItem("PLENTIFUL BUFF POTION");
+            Console.WriteLine(p.ToString());
+            Console.WriteLine("Use vigorous potion of damage");
+            p.useItem("VIGOROUS DAMAGE POTION");
             Console.WriteLine(p.ToString());
             Console.WriteLine();
         }
@@ -102,15 +115,59 @@ namespace GameClient
 
         static void Main()
         {
-            BuilderShow(new EnemyCreatorAdapter());
+            //BuilderShow(new EnemyCreatorAdapter());
             //StrategyShow();
-            PrototypeShow();
+            ChainOfResponsibilityShow();
+            //PrototypeShow();
+            //DecoratorShow();
             //ShopShow();
             Console.ReadKey();
 
 
             /*Console.WriteLine("Web API Client says: \"Hello World!\"");
             RunAsync().GetAwaiter().GetResult();*/
+        }
+
+        private static void ChainOfResponsibilityShow()
+        {
+            Player p = new Player(1, 2, 2, "TestPlayer", 10, 5, 3, 1, 0, 600);
+            Console.WriteLine("Player's stats before enchantment:");
+            Console.WriteLine(p.ToString());
+            Enchanter e = new Enchanter(p);
+            if(p.gold > e.enchantmentCost){
+                Console.WriteLine("Starting Enchantment:");
+                e.startEnchantment();
+            } else {
+                Console.WriteLine("You dont have enough money for an enchantment");
+            }
+
+            Console.WriteLine("Player's stats after enchantment:");
+            Console.WriteLine(p.ToString());
+        }
+
+        private static void DecoratorShow()
+        {
+            PlayerJson player = new PlayerJson
+            {
+                x = 1,
+                y = 2,
+                name = "tadas",
+                hitpoints = 10,
+                attack = 1,
+                defence = 1,
+                level = 1,
+                experience = 0,
+                gold = 4
+            };
+            EmptyMapComponent e = new EmptyMapComponent();
+            e.draw(0, 0);
+            PlayerDecorator pd = new PlayerDecorator(e);
+            pd.draw(Convert.ToInt32(player.x), Convert.ToInt32(player.y));
+            Console.ReadKey();
+            e.drawDungeon(0, 0);
+            pd.drawDungeon(Convert.ToInt32(player.x), Convert.ToInt32(player.y));
+
+            Console.WriteLine("Drew decorator");
         }
 
         public static List<EnemyParty> createEnemies()
@@ -159,11 +216,6 @@ namespace GameClient
                 player = await ws.GetPlayerAsync(url.PathAndQuery);
                 ShowProduct(player);
 
-                // Get the created player
-                Console.WriteLine("1.3)\tGet enemies");
-                ICollection<EnemyPartyJson> enemyPartyJsons = (await ws.GetAllEnemiesAsync());
-                List<EnemyParty> enemyParties = EnemyConverter.createEnemyParties(enemyPartyJsons);
-
                 ConsoleKeyInfo keyInfo = Console.ReadKey();
                 char key = keyInfo.KeyChar;
 
@@ -173,28 +225,16 @@ namespace GameClient
                     switch (key)
                     {
                         case 'w':
-                            if(player.y > 0 && player.y < 10)
-                            {
-                                player.y -= 1;
-                            }
+                            player.y -= 1;
                             break;
                         case 'd':
-                            if (player.x > 0 && player.x < 10)
-                            {
-                                player.x += 1;
-                            }
+                            player.x += 1;
                             break;
                         case 's':
-                            if (player.y > 0 && player.y < 10)
-                            {
-                                player.y += 1;
-                            }
+                            player.y += 1;
                             break;
                         case 'a':
-                            if (player.x > 0 && player.x < 10)
-                            {
-                                player.x -= 1;
-                            }
+                            player.x -= 1;
                             break;
                     }
 
@@ -213,14 +253,11 @@ namespace GameClient
                     PlayerDecorator pd = new PlayerDecorator(e);
                     pd.draw(Convert.ToInt32(player.x), Convert.ToInt32(player.y));
 
-                    EnemyDecorator ed = new EnemyDecorator(e);
-                    foreach (EnemyParty ep in enemyParties)
-                    {
-                        ed.draw(Convert.ToInt32(ep.position.x),Convert.ToInt32(ep.position.y));
-                    }
                     keyInfo = Console.ReadKey();
                     key = keyInfo.KeyChar;
                 }
+
+
 
                 /*
                 // Get all players
