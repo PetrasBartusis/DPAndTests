@@ -98,13 +98,14 @@ namespace GameServer.Models
         public int getHp() => this.CurrentHitpoints;
 
         public int getMaxHp() => this.Hitpoints;
-
+	    public int seMaxHp(int MaxHp) => this.Hitpoints = MaxHp;
         public int setDefence(int defence) => this.Defence = defence;
         public int getDefence() => this.Defence;
 
         public int setAttack(int attack) => this.Attack = attack;
         public int getAttack() => this.Attack;
-
+	    public int getGold() => this.gold;
+	    public int setGold(int Gold) => this.gold = Gold;
         public object Clone()
         {
             Player p = (Player)this.MemberwiseClone();

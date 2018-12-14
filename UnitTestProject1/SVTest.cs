@@ -30,9 +30,19 @@ namespace UnitTestProject1
             player.x += 1;
             var updateStatusCode = await ws.UpdatePlayerAsync(player);
             PlayerJson playerFromServer = await ws.GetPlayerAsync(url.PathAndQuery);
-            //ComparePlayers(player, playerFromServer);
-            Assert.AreEqual(player.x, playerFromServer.x);
-            Assert.AreEqual(player.y, playerFromServer.y);
+            ComparePlayers(player, playerFromServer);
+            player.x -= 1;
+            updateStatusCode = await ws.UpdatePlayerAsync(player);
+            playerFromServer = await ws.GetPlayerAsync(url.PathAndQuery);
+            ComparePlayers(player, playerFromServer);
+            player.y += 1;
+            updateStatusCode = await ws.UpdatePlayerAsync(player);
+            playerFromServer = await ws.GetPlayerAsync(url.PathAndQuery);
+            ComparePlayers(player, playerFromServer);
+            player.y -= 1;
+            updateStatusCode = await ws.UpdatePlayerAsync(player);
+            playerFromServer = await ws.GetPlayerAsync(url.PathAndQuery);
+            ComparePlayers(player, playerFromServer);
         }
 
         private PlayerJson CreatePlayer(string n)

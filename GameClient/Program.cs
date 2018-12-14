@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using GameClient.CompositeAndInterpreter;
 using Newtonsoft.Json;
 using GameServer.Models;
 using GameClient.Decorator;
@@ -31,6 +32,12 @@ namespace GameClient
         }
         static void ShopShow()
         {
+
+            int x;
+            int y;
+            string e;
+            Item i;
+
             Shop shop = new Shop(new Receiver());
             shop.addToCart(new Item(0, "HP", PotionType.health, 50, new Minor()));
             shop.addToCart(new Item(0, "BF", PotionType.buff, 75, new Minor()));
@@ -117,10 +124,11 @@ namespace GameClient
         {
             //BuilderShow(new EnemyCreatorAdapter());
             //StrategyShow();
-            ChainOfResponsibilityShow();
+            //ChainOfResponsibilityShow();
             //PrototypeShow();
             //DecoratorShow();
             //ShopShow();
+            CompositeShow();
             Console.ReadKey();
 
 
@@ -170,15 +178,44 @@ namespace GameClient
             Console.WriteLine("Drew decorator");
         }
 
+        private static void CompositeShow()
+        {
+            Player p = new Player(1, 2, 2, "TestPlayer", 10, 5, 3, 1, 0, 0);
+            Console.WriteLine(p.ToString());
+            Cheat cheats = new Cheat();
+
+            p = cheats.allCheats(p, 100);
+            Console.WriteLine("After cheat");
+            Console.WriteLine(p.ToString());
+        }
+
+        private static void InterpreterShow()
+        {
+            Player p = new Player(1, 2, 2, "TestPlayer", 10, 5, 3, 1, 0, 0);
+            Console.WriteLine(p.ToString());
+            Cheat cheats = new Cheat();
+            p = cheats.lifeCheat(p, 100);
+            Console.WriteLine("Life Cheat");
+            Console.WriteLine(p.ToString());
+            p = cheats.attackCheat(p, 100);
+            Console.WriteLine("Attack Cheat");
+            Console.WriteLine(p.ToString());
+            p = cheats.defenceCheat(p, 100);
+            Console.WriteLine("Defence Cheat");
+            Console.WriteLine(p.ToString());
+            p = cheats.moneyCheat(p, 100);
+            Console.WriteLine("Money Cheat");
+            Console.WriteLine(p.ToString());
+        }
         public static List<EnemyParty> createEnemies()
         {
             IEnemyCreator enemyCreator = new EnemyCreatorAdapter();
             List<EnemyParty> enemies = new List<EnemyParty>();
             enemies.Add(enemyCreator.GetEnemyParty(0, new Coordinates(0, 0), LevelType.GRASS));
             enemies.Add(enemyCreator.GetEnemyParty(1, new Coordinates(4, 4), LevelType.GREVEYARD));
-            foreach (EnemyParty p in enemies)
+            for (int i= 0; i < enemies.Count; i++)
             {
-                EnemyPartyJson pj = EnemyConverter.createEnemyPartyJson(p);
+                EnemyPartyJson pj = EnemyConverter.createEnemyPartyJson(enemies[i]);
                 Console.WriteLine();
             }
             return enemies;
