@@ -60,6 +60,7 @@ namespace GameClient
         static void StrategyShow()
         {
             Player p = new Player(1, 2, 2, "TestPlayer", 10, 5, 3, 1, 0, 0);
+            p.addItem(new Item(1, "NULL HEALTH POTION", PotionType.health, 10, new Null()));
             p.addItem(new Item(1, "MINOR HEALTH POTION", PotionType.health, 10, new Minor()));
             p.addItem(new Item(1, "PLENTIFUL HEALTH POTION", PotionType.health, 10, new Plentiful()));
             p.addItem(new Item(1, "VIGOROUS HEALTH POTION", PotionType.health, 10, new Vigorous()));
@@ -68,6 +69,9 @@ namespace GameClient
             Console.WriteLine(p.ToString());
             Console.WriteLine("Damage player by 8");
             p.damagePlayer(8);
+            Console.WriteLine(p.ToString());
+            Console.WriteLine("Use potion of NULL healing");
+            p.useItem("NULL HEALTH POTION");
             Console.WriteLine(p.ToString());
             Console.WriteLine("Use potion of minor healing");
             p.useItem("MINOR HEALTH POTION");
@@ -116,8 +120,8 @@ namespace GameClient
         static void Main()
         {
             //BuilderShow(new EnemyCreatorAdapter());
-            //StrategyShow();
-            ChainOfResponsibilityShow();
+            StrategyShow();
+            //ChainOfResponsibilityShow();
             //PrototypeShow();
             //DecoratorShow();
             //ShopShow();
