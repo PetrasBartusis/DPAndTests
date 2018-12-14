@@ -58,9 +58,7 @@ namespace GameClient.ShopModule
         {
             if (caretaker.CanUndo())
             {
-                Memento memento = caretaker.Undo();
-                cart = memento.BuyItems;
-                sell = memento.SellItems;
+                caretaker.Undo().ResetState(sell, cart);
                 return true;
             }
             return false;
@@ -69,9 +67,7 @@ namespace GameClient.ShopModule
         {
             if (caretaker.CanRedo())
             {
-                Memento memento = caretaker.Redo();
-                cart = memento.BuyItems;
-                sell = memento.SellItems;
+                caretaker.Redo().ResetState(sell, cart);
                 return true;
             }
             return false;
