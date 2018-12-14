@@ -11,5 +11,10 @@ namespace GameServer.State
         {
             entity.CurrentHitpoints -= 1;
         }
+
+        public StateType StateType()
+        {
+            return State.StateType.POISON;
+        }
     }
 }

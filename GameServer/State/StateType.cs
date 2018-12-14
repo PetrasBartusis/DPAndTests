@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 
 namespace GameServer.State
 {
-    public interface IState
+    public enum StateType
     {
-        void Handle(Entity entity);
-        StateType StateType();
+        POISON,
+        BURN,
+        FEAR,
+        STUN
     }
 }

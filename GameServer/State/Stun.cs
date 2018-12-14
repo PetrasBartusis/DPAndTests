@@ -11,5 +11,10 @@ namespace GameServer.State
         {
             throw new NotImplementedException();
         }
+
+        public StateType StateType()
+        {
+            return State.StateType.STUN;
+        }
     }
 }
